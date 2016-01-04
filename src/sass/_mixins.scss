@@ -1,0 +1,11 @@
+@mixin clearfix(){
+  &:after { content: ""; display: block; height: 0; width:0; clear: both; visibility: hidden; overflow:hidden;}
+  *zoom: 1;
+  display: block;
+}
+
+@mixin text-overflow(){
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

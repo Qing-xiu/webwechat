@@ -1,0 +1,34 @@
+/*reset*/
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, code,
+del, dfn, em, img, q, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend{
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  list-style: none;
+}
+
+html, body {
+  	width: 100%;
+  	-webkit-tap-highlight-color: transparent;
+}
+
+body{
+	font-size: 12px;
+  	font-family: "微软雅黑", "Microsoft YaHei", "Hiragino Sans GB", Helvetica, Arial, sans-serif;
+  	-webkit-font-smoothing: antialiased;
+}
+
+a{
+  text-decoration: none;
+}
+input{
+  outline: none;
+  margin:0px;
+  padding: 0px;
+}
