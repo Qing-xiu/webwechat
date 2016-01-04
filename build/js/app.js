@@ -66,7 +66,7 @@
 	
 	__webpack_require__(60);
 	
-	console.log(_index2.default);
+	window.store = _index2.default;
 	
 	new _vue2.default({
 		el: 'body',
@@ -13645,9 +13645,19 @@
 	_vue2.default.use(_vuex2.default);
 	
 	var store = new _vuex2.default.Store({
-		state: {},
-		actions: {},
-		mutations: {}
+		state: {
+			count: 1
+		},
+		mutations: {
+			INCREMENT: function INCREMENT(state, n) {
+				state.count += n;
+			}
+		},
+	
+		actions: {
+			increment: 'INCREMENT'
+		}
+	
 	});
 	
 	exports.default = store;

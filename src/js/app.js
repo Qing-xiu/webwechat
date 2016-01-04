@@ -5,7 +5,7 @@ import Router from 'vue-router';
 import App from '../components/app.vue';
 import store from './store/index.js';
 
-console.log(store)
+window.store = store;
 
 new Vue({
 	el:'body',
