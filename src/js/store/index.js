@@ -4,19 +4,23 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
+	strict: true,
+	middlewares: [Vuex.createLogger()],
 	state: {
-		count: 1
+		view: 'chat'
 	},
 	mutations: {
-		INCREMENT (state, n) {
-			state.count += n;
+		CHANGEVIEW (state, view){
+			state.view = view
 		}
 	},
 
 	actions: {
-		increment: 'INCREMENT'
+		changeView: 'CHANGEVIEW'
 	},
 	
 })
+
+console.log(process.env.NODE_ENV)
 
 export default store;

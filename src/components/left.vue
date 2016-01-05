@@ -24,11 +24,6 @@
 
 	export default{
 		name: 'left',
-		data (){
-			return {
-				currentView: 'chat'
-			}
-		},
 		components:{
 			user,
 			search,

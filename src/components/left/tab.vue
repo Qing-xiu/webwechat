@@ -1,24 +1,21 @@
 <template>
 	<div class="tab">
 		<div class="tab-item">
-			<a class="item-btn" @click="tab('chat')" href="javascript:;">
+			<a class="item-btn" @click="changeView('chat')" href="javascript:;">
 				<i v-show="currentView == 'chat'" class="iconfont hover">&#xe606;</i>
 				<i v-else class="iconfont">&#xe602;</i>
 			</a>
 		</div>
 		<div class="tab-item">
-			<a class="item-btn" @click="tab('contact')" href="javascript:;">
+			<a class="item-btn" @click="changeView('contact')" href="javascript:;">
 				<i v-show="currentView == 'contact'" class="iconfont hover">&#xe605;</i>
 				<i v-else class="iconfont">&#xe603;</i>
 			</a>
 		</div>
 	</div>
-	<div class="nav-view" v-show="currentView == 'chat'">
-		<!-- <component :is="currentView"></component> -->
-		<chat></chat>
-	</div>
-	<div class="nav-view" v-else>
-		<contact></contact>
+	<div class="nav-view" >
+		<chat v-show="currentView == 'chat'"></chat>
+		<contact v-show="currentView == 'contact'"></contact>
 	</div>
 </template>
 
@@ -73,14 +70,15 @@
 </style>
 
 <script lang="babel">
+	import store from '../../js/store/index.js'
 	import chat from './chat.vue'
 	import contact from './contact.vue'
 
 	export default {
 		name: 'tab',
-		data () {
-			return {
-				currentView : 'contact'
+		computed:{
+			currentView () {
+				return store.state.view
 			}
 		},
 		components: {
@@ -88,9 +86,7 @@
 			contact
 		},
 		methods:{
-			tab: function(current){
-				this.currentView = current;
-			}
+			changeView: store.actions.changeView
 		}
 	}
 </script>

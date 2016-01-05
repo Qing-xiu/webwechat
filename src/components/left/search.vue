@@ -41,6 +41,8 @@
 </style>
 
 <script lang="babel">
+	import store from '../../js/store/index.js'
+
 	export default {
 		name: 'search'
 	}

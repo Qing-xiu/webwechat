@@ -17,10 +17,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-wenjianjia:before { content: "\e607"; }
+.icon-xiangxia:before { content: "\e608"; }
 .icon-sousuo:before { content: "\e600"; }
 .icon-liebiao:before { content: "\e601"; }
+.icon-tuichu:before { content: "\e609"; }
+.icon-jia:before { content: "\e60a"; }
+.icon-contacts:before { content: "\e60b"; }
+.icon-xuanzhong:before { content: "\e60c"; }
 .icon-tongxunlu:before { content: "\e605"; }
+.icon-nv:before { content: "\e60d"; }
 .icon-icon1:before { content: "\e602"; }
 .icon-iconchatpress:before { content: "\e606"; }
 .icon-icontongxunlu:before { content: "\e603"; }
 .icon-weikaiqi:before { content: "\e604"; }
+.icon-biaoqing:before { content: "\e60e"; }
