@@ -13056,9 +13056,13 @@
 	// 			</a>
 	// 		</div>
 	// 	</div>
-	// 	<div class="nav-view" >
-	// 		<chat v-show="currentView == 'chat'"></chat>
-	// 		<contact v-show="currentView == 'contact'"></contact>
+
+	// 	<div class="nav-view" v-show="currentView == 'chat'" >
+	// 		<chat></chat>
+	// 	</div>
+
+	// 	<div class="nav-view" v-show="currentView == 'contact'" >
+	// 		<contact></contact>
 	// 	</div>
 	// </template>
 
@@ -13512,7 +13516,7 @@
 /* 47 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"tab\">\n\t\t<div class=\"tab-item\">\n\t\t\t<a class=\"item-btn\" @click=\"changeView('chat')\" href=\"javascript:;\">\n\t\t\t\t<i v-show=\"currentView == 'chat'\" class=\"iconfont hover\">&#xe606;</i>\n\t\t\t\t<i v-else class=\"iconfont\">&#xe602;</i>\n\t\t\t</a>\n\t\t</div>\n\t\t<div class=\"tab-item\">\n\t\t\t<a class=\"item-btn\" @click=\"changeView('contact')\" href=\"javascript:;\">\n\t\t\t\t<i v-show=\"currentView == 'contact'\" class=\"iconfont hover\">&#xe605;</i>\n\t\t\t\t<i v-else class=\"iconfont\">&#xe603;</i>\n\t\t\t</a>\n\t\t</div>\n\t</div>\n\t<div class=\"nav-view\" >\n\t\t<chat v-show=\"currentView == 'chat'\"></chat>\n\t\t<contact v-show=\"currentView == 'contact'\"></contact>\n\t</div>";
+	module.exports = "<div class=\"tab\">\n\t\t<div class=\"tab-item\">\n\t\t\t<a class=\"item-btn\" @click=\"changeView('chat')\" href=\"javascript:;\">\n\t\t\t\t<i v-show=\"currentView == 'chat'\" class=\"iconfont hover\">&#xe606;</i>\n\t\t\t\t<i v-else class=\"iconfont\">&#xe602;</i>\n\t\t\t</a>\n\t\t</div>\n\t\t<div class=\"tab-item\">\n\t\t\t<a class=\"item-btn\" @click=\"changeView('contact')\" href=\"javascript:;\">\n\t\t\t\t<i v-show=\"currentView == 'contact'\" class=\"iconfont hover\">&#xe605;</i>\n\t\t\t\t<i v-else class=\"iconfont\">&#xe603;</i>\n\t\t\t</a>\n\t\t</div>\n\t</div>\n\n\t<div class=\"nav-view\" v-show=\"currentView == 'chat'\" >\n\t\t<chat></chat>\n\t</div>\n\n\t<div class=\"nav-view\" v-show=\"currentView == 'contact'\" >\n\t\t<contact></contact>\n\t</div>";
 
 /***/ },
 /* 48 */
@@ -13619,9 +13623,11 @@
 	};
 	// </script>
 	// <template>
-	// 	<div class="box" >
-	// 		<chatarea v-show="view == 'chat'"></chatarea>
-	// 		<contactarea v-show="view == 'contact'"></contactarea>
+	// 	<div class="box" v-show="view == 'chat'">
+	// 		<chatarea></chatarea>
+	// 	</div>
+	// 	<div class="box" v-show="view == 'contact'">
+	// 		<contactarea></contactarea>
 	// 	</div>
 	// </template>
 
@@ -13640,7 +13646,7 @@
 /* 53 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"box\" >\n\t\t<chatarea v-show=\"view == 'chat'\"></chatarea>\n\t\t<contactarea v-show=\"view == 'contact'\"></contactarea>\n\t</div>";
+	module.exports = "<div class=\"box\" v-show=\"view == 'chat'\">\n\t\t<chatarea></chatarea>\n\t</div>\n\t<div class=\"box\" v-show=\"view == 'contact'\">\n\t\t<contactarea></contactarea>\n\t</div>";
 
 /***/ },
 /* 54 */
@@ -14211,7 +14217,7 @@
 	
 	
 	// module
-	exports.push([module.id, "@charset \"UTF-8\";\n/*reset*/\nhtml, body, div, span, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, code,\ndel, dfn, em, img, q, dl, dt, dd, ol, ul, li,\nfieldset, form, label, legend {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-weight: inherit;\n  font-style: inherit;\n  font-size: 100%;\n  list-style: none; }\n\nhtml, body {\n  width: 100%;\n  -webkit-tap-highlight-color: transparent; }\n\nbody {\n  font-size: 12px;\n  font-family: \"\\5FAE\\8F6F\\96C5\\9ED1\", \"Microsoft YaHei\", \"Hiragino Sans GB\", Helvetica, Arial, sans-serif;\n  -webkit-font-smoothing: antialiased; }\n\na {\n  text-decoration: none; }\n\ninput {\n  outline: none;\n  margin: 0px;\n  padding: 0px; }\n\nhtml, body {\n  height: 100%; }\n\nbody {\n  background: url(" + __webpack_require__(62) + ") no-repeat center center;\n  background-size: cover;\n  font-family: \"Helvetica Neue\",Helvetica,\"Hiragino Sans GB\",\"Microsoft YaHei\",\"\\5FAE\\8F6F\\96C5\\9ED1\",Arial,sans-serif; }\n\n::-webkit-scrollbar {\n  width: 6px;\n  height: 6px; }\n\n::-webkit-scrollbar-thumb {\n  border-radius: 3px;\n  -moz-border-radius: 3px;\n  -webkit-border-radius: 3px;\n  background-color: #c3c3c3; }\n\n::-webkit-scrollbar-track {\n  background-color: transparent; }\n\n@font-face {\n  font-family: \"iconfont\";\n  src: url(" + __webpack_require__(63) + ");\n  /* IE9*/\n  src: url(" + __webpack_require__(63) + "?#iefix) format(\"embedded-opentype\"), url(" + __webpack_require__(64) + ") format(\"woff\"), url(" + __webpack_require__(65) + ") format(\"truetype\"), url(" + __webpack_require__(66) + "#iconfont) format(\"svg\");\n  /* iOS 4.1- */ }\n\n.iconfont {\n  font-family: \"iconfont\" !important;\n  font-size: 16px;\n  font-style: normal;\n  -webkit-font-smoothing: antialiased;\n  -webkit-text-stroke-width: 0.2px;\n  -moz-osx-font-smoothing: grayscale; }\n\n.icon-wenjianjia:before {\n  content: \"\\E607\"; }\n\n.icon-xiangxia:before {\n  content: \"\\E608\"; }\n\n.icon-sousuo:before {\n  content: \"\\E600\"; }\n\n.icon-liebiao:before {\n  content: \"\\E601\"; }\n\n.icon-tuichu:before {\n  content: \"\\E609\"; }\n\n.icon-jia:before {\n  content: \"\\E60A\"; }\n\n.icon-contacts:before {\n  content: \"\\E60B\"; }\n\n.icon-xuanzhong:before {\n  content: \"\\E60C\"; }\n\n.icon-tongxunlu:before {\n  content: \"\\E605\"; }\n\n.icon-nv:before {\n  content: \"\\E60D\"; }\n\n.icon-icon1:before {\n  content: \"\\E602\"; }\n\n.icon-iconchatpress:before {\n  content: \"\\E606\"; }\n\n.icon-icontongxunlu:before {\n  content: \"\\E603\"; }\n\n.icon-weikaiqi:before {\n  content: \"\\E604\"; }\n\n.icon-biaoqing:before {\n  content: \"\\E60E\"; }\n", ""]);
+	exports.push([module.id, "@charset \"UTF-8\";\n/*reset*/\nhtml, body, div, span, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, code,\ndel, dfn, em, img, q, dl, dt, dd, ol, ul, li,\nfieldset, form, label, legend {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-weight: inherit;\n  font-style: inherit;\n  font-size: 100%;\n  list-style: none; }\n\nhtml, body {\n  width: 100%;\n  -webkit-tap-highlight-color: transparent; }\n\nbody {\n  font-size: 12px;\n  font-family: \"\\5FAE\\8F6F\\96C5\\9ED1\", \"Microsoft YaHei\", \"Hiragino Sans GB\", Helvetica, Arial, sans-serif;\n  -webkit-font-smoothing: antialiased; }\n\na {\n  text-decoration: none; }\n\ninput {\n  outline: none;\n  margin: 0px;\n  padding: 0px; }\n\npre {\n  margin: 0;\n  font-family: inherit;\n  font-size: inherit;\n  white-space: pre-wrap;\n  word-break: initial; }\n\nhtml, body {\n  height: 100%; }\n\nbody {\n  background: url(" + __webpack_require__(62) + ") no-repeat center center;\n  background-size: cover;\n  font-family: \"Helvetica Neue\",Helvetica,\"Hiragino Sans GB\",\"Microsoft YaHei\",\"\\5FAE\\8F6F\\96C5\\9ED1\",Arial,sans-serif; }\n\n::-webkit-scrollbar {\n  width: 6px;\n  height: 6px; }\n\n::-webkit-scrollbar-thumb {\n  border-radius: 3px;\n  -moz-border-radius: 3px;\n  -webkit-border-radius: 3px;\n  background-color: #c3c3c3; }\n\n::-webkit-scrollbar-track {\n  background-color: transparent; }\n\n@font-face {\n  font-family: \"iconfont\";\n  src: url(" + __webpack_require__(63) + ");\n  /* IE9*/\n  src: url(" + __webpack_require__(63) + "?#iefix) format(\"embedded-opentype\"), url(" + __webpack_require__(64) + ") format(\"woff\"), url(" + __webpack_require__(65) + ") format(\"truetype\"), url(" + __webpack_require__(66) + "#iconfont) format(\"svg\");\n  /* iOS 4.1- */ }\n\n.iconfont {\n  font-family: \"iconfont\" !important;\n  font-size: 16px;\n  font-style: normal;\n  -webkit-font-smoothing: antialiased;\n  -webkit-text-stroke-width: 0.2px;\n  -moz-osx-font-smoothing: grayscale; }\n\n.icon-wenjianjia:before {\n  content: \"\\E607\"; }\n\n.icon-xiangxia:before {\n  content: \"\\E608\"; }\n\n.icon-sousuo:before {\n  content: \"\\E600\"; }\n\n.icon-liebiao:before {\n  content: \"\\E601\"; }\n\n.icon-tuichu:before {\n  content: \"\\E609\"; }\n\n.icon-jia:before {\n  content: \"\\E60A\"; }\n\n.icon-contacts:before {\n  content: \"\\E60B\"; }\n\n.icon-xuanzhong:before {\n  content: \"\\E60C\"; }\n\n.icon-tongxunlu:before {\n  content: \"\\E605\"; }\n\n.icon-nv:before {\n  content: \"\\E60D\"; }\n\n.icon-icon1:before {\n  content: \"\\E602\"; }\n\n.icon-iconchatpress:before {\n  content: \"\\E606\"; }\n\n.icon-icontongxunlu:before {\n  content: \"\\E603\"; }\n\n.icon-weikaiqi:before {\n  content: \"\\E604\"; }\n\n.icon-biaoqing:before {\n  content: \"\\E60E\"; }\n", ""]);
 	
 	// exports
 
@@ -14288,7 +14294,19 @@
 	
 	// 	<div class="chat-wrapper">
 	// 		<div class="wrapper-bd">
+	// 			<div class="bubble">
+	// 				<div class="bubble-system">
+	// 					<span class="system-content">15:16</span>
+	// 				</div>
 	
+	// 				<img class="bubble-avatar" src="../../img/webwxgeticon.jpeg" width="40" height="40" />
+	// 				<div class="bubble-content">
+	// 					<div class="content-nickname">哈哈镜</div>
+	// 					<div class="content-msg">
+	// 						<pre>经典1987复古手工小棉袄   颜色深邃蓝  喜庆红  各种碎花,经典1987复古手工小棉袄   颜色深邃蓝  喜庆红  各种碎花</pre>
+	// 					</div>
+	// 				</div>
+	// 			</div>
 	// 		</div>
 	// 	</div>
 	
@@ -14344,7 +14362,58 @@
 	// 		overflow-y: auto;
 	// 		padding: 0 19px;
 	// 		.wrapper-bd{
-	// 			height: 1000px;
+	
+	// 		}
+	
+	// 		.bubble{
+	// 			@include clearfix();
+	// 			margin-bottom: 16px;
+	// 		}
+	
+	// 		.bubble-system{
+	// 			text-align:center;
+	// 			margin: 10px auto;
+	// 			max-width: 50%;
+	// 			.system-content{
+	// 				display: inline-block;
+	// 				line-height: 1.6;
+	// 				background-color: #dcdcdc;
+	// 				font-size:12px;
+	// 				padding: 1px 18px;
+	// 				color: #fff;
+	// 				border-radius: 2px;
+	// 			}
+	// 		}
+	
+	// 		.bubble-avatar{
+	// 			float: left;
+	// 		}
+	
+	// 		.bubble-content{
+	// 			overflow: hidden;
+	
+	// 			.content-nickname{
+	// 				font-size: 12px;
+	// 				font-weight: 400;
+	// 				@include text-overflow();
+	// 				width: 350px;
+	// 				padding-left: 10px;
+	// 				color:#4f4f4f;
+	// 				height: 22px;
+	// 				line-height:24px;
+	// 			}
+	// 			.content-msg{
+	// 				word-wrap: break-word;
+	// 				word-break: break-all;
+	// 				padding: 9px 13px;
+	// 				background-color:#fff;
+	// 				border-radius: 3px;
+	// 				max-width:500px;
+	// 				margin: 0 10px;
+	// 				font-size: 14px;
+	// 				-webkit-box-sizing: border-box;
+	// 				box-sizing: border-box;
+	// 			}
 	// 		}
 	// 	}
 	
@@ -14357,6 +14426,7 @@
 	// 		margin-right: 19px;
 	// 		border-top: 1px solid #d6d6d6;
 	// 	}
+	
 	// </style>
 	
 	// <script>
@@ -14367,9 +14437,9 @@
 
 /***/ },
 /* 70 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<div class=\"title-wrap\">\n\t\t<div class=\"wrap-poi\">\n\t\t\t<span class=\"poi-name\">赵日天</span>\n\t\t\t<span class=\"poi-count\">(12)</span>\n\t\t\t<i class=\"iconfont poi-icon\">&#xe608;</i>\n\t\t</div>\n\t</div>\n\n\t<div class=\"chat-wrapper\">\n\t\t<div class=\"wrapper-bd\">\n\t\t\t\n\t\t</div>\n\t</div>\n\n\t<div class=\"chat-ft\">\n\t\t\n\t</div>";
+	module.exports = "<div class=\"title-wrap\">\n\t\t<div class=\"wrap-poi\">\n\t\t\t<span class=\"poi-name\">赵日天</span>\n\t\t\t<span class=\"poi-count\">(12)</span>\n\t\t\t<i class=\"iconfont poi-icon\">&#xe608;</i>\n\t\t</div>\n\t</div>\n\n\t<div class=\"chat-wrapper\">\n\t\t<div class=\"wrapper-bd\">\n\t\t\t<div class=\"bubble\">\n\t\t\t\t<div class=\"bubble-system\">\n\t\t\t\t\t<span class=\"system-content\">15:16</span>\n\t\t\t\t</div>\n\n\t\t\t\t<img class=\"bubble-avatar\" src=\"" + __webpack_require__(27) + "\" width=\"40\" height=\"40\" />\n\t\t\t\t<div class=\"bubble-content\">\n\t\t\t\t\t<div class=\"content-nickname\">哈哈镜</div>\n\t\t\t\t\t<div class=\"content-msg\">\n\t\t\t\t\t\t<pre>经典1987复古手工小棉袄   颜色深邃蓝  喜庆红  各种碎花,经典1987复古手工小棉袄   颜色深邃蓝  喜庆红  各种碎花</pre>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\n\t<div class=\"chat-ft\">\n\t\t\n\t</div>";
 
 /***/ },
 /* 71 */,
@@ -14454,7 +14524,7 @@
 	
 	
 	// module
-	exports.push([module.id, ".title-wrap {\n  position: relative;\n  padding: 10px 0;\n  margin: 0 19px;\n  border-bottom: 1px solid #d6d6d6;\n  background-color: #EEE;\n  z-index: 9;\n  text-align: center; }\n  .title-wrap .wrap-poi {\n    height: 30px;\n    display: inline-block;\n    line-height: 30px;\n    cursor: pointer; }\n  .title-wrap .poi-count {\n    display: inline-block;\n    vertical-align: middle;\n    font-size: 14px;\n    font-weight: 400; }\n  .title-wrap .poi-name {\n    display: inline-block;\n    max-width: 300px;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    vertical-align: middle;\n    font-size: 14px;\n    font-weight: 400; }\n  .title-wrap .poi-icon {\n    vertical-align: middle;\n    color: #999; }\n\n.chat-wrapper {\n  position: absolute;\n  left: 0px;\n  right: 0px;\n  top: 51px;\n  bottom: 180px;\n  overflow-y: auto;\n  padding: 0 19px; }\n  .chat-wrapper .wrapper-bd {\n    height: 1000px; }\n\n.chat-ft {\n  position: absolute;\n  height: 180px;\n  bottom: 0px;\n  left: 0px;\n  right: 0px;\n  margin-right: 19px;\n  border-top: 1px solid #d6d6d6; }\n", ""]);
+	exports.push([module.id, ".title-wrap {\n  position: relative;\n  padding: 10px 0;\n  margin: 0 19px;\n  border-bottom: 1px solid #d6d6d6;\n  background-color: #EEE;\n  z-index: 9;\n  text-align: center; }\n  .title-wrap .wrap-poi {\n    height: 30px;\n    display: inline-block;\n    line-height: 30px;\n    cursor: pointer; }\n  .title-wrap .poi-count {\n    display: inline-block;\n    vertical-align: middle;\n    font-size: 14px;\n    font-weight: 400; }\n  .title-wrap .poi-name {\n    display: inline-block;\n    max-width: 300px;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    vertical-align: middle;\n    font-size: 14px;\n    font-weight: 400; }\n  .title-wrap .poi-icon {\n    vertical-align: middle;\n    color: #999; }\n\n.chat-wrapper {\n  position: absolute;\n  left: 0px;\n  right: 0px;\n  top: 51px;\n  bottom: 180px;\n  overflow-y: auto;\n  padding: 0 19px; }\n  .chat-wrapper .bubble {\n    *zoom: 1;\n    display: block;\n    margin-bottom: 16px; }\n    .chat-wrapper .bubble:after {\n      content: \"\";\n      display: block;\n      height: 0;\n      width: 0;\n      clear: both;\n      visibility: hidden;\n      overflow: hidden; }\n  .chat-wrapper .bubble-system {\n    text-align: center;\n    margin: 10px auto;\n    max-width: 50%; }\n    .chat-wrapper .bubble-system .system-content {\n      display: inline-block;\n      line-height: 1.6;\n      background-color: #dcdcdc;\n      font-size: 12px;\n      padding: 1px 18px;\n      color: #fff;\n      border-radius: 2px; }\n  .chat-wrapper .bubble-avatar {\n    float: left; }\n  .chat-wrapper .bubble-content {\n    overflow: hidden; }\n    .chat-wrapper .bubble-content .content-nickname {\n      font-size: 12px;\n      font-weight: 400;\n      white-space: nowrap;\n      overflow: hidden;\n      text-overflow: ellipsis;\n      width: 350px;\n      padding-left: 10px;\n      color: #4f4f4f;\n      height: 22px;\n      line-height: 24px; }\n    .chat-wrapper .bubble-content .content-msg {\n      word-wrap: break-word;\n      word-break: break-all;\n      padding: 9px 13px;\n      background-color: #fff;\n      border-radius: 3px;\n      max-width: 500px;\n      margin: 0 10px;\n      font-size: 14px;\n      box-sizing: border-box; }\n\n.chat-ft {\n  position: absolute;\n  height: 180px;\n  bottom: 0px;\n  left: 0px;\n  right: 0px;\n  margin-right: 19px;\n  border-top: 1px solid #d6d6d6; }\n", ""]);
 	
 	// exports
 

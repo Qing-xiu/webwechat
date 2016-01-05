@@ -9,7 +9,19 @@
 
 	<div class="chat-wrapper">
 		<div class="wrapper-bd">
-			
+			<div class="bubble">
+				<div class="bubble-system">
+					<span class="system-content">15:16</span>
+				</div>
+
+				<img class="bubble-avatar" src="../../img/webwxgeticon.jpeg" width="40" height="40" />
+				<div class="bubble-content">
+					<div class="content-nickname">哈哈镜</div>
+					<div class="content-msg">
+						<pre>经典1987复古手工小棉袄   颜色深邃蓝  喜庆红  各种碎花,经典1987复古手工小棉袄   颜色深邃蓝  喜庆红  各种碎花</pre>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -65,7 +77,58 @@
 		overflow-y: auto;
 		padding: 0 19px;
 		.wrapper-bd{
-			height: 1000px;
+			
+		}
+
+		.bubble{
+			@include clearfix();
+			margin-bottom: 16px;
+		}
+
+		.bubble-system{
+			text-align:center;
+			margin: 10px auto;
+			max-width: 50%;
+			.system-content{
+				display: inline-block;
+				line-height: 1.6;
+				background-color: #dcdcdc;
+				font-size:12px;
+				padding: 1px 18px;
+				color: #fff;
+				border-radius: 2px;
+			}
+		}
+
+		.bubble-avatar{
+			float: left;
+		}
+
+		.bubble-content{
+			overflow: hidden;
+
+			.content-nickname{
+				font-size: 12px;
+				font-weight: 400;
+				@include text-overflow();
+				width: 350px;
+				padding-left: 10px;
+				color:#4f4f4f;
+				height: 22px;
+				line-height:24px;
+			}
+			.content-msg{
+				word-wrap: break-word;
+				word-break: break-all;
+				padding: 9px 13px;
+				background-color:#fff;
+				border-radius: 3px;
+				max-width:500px;
+				margin: 0 10px;
+				font-size: 14px;
+				-webkit-box-sizing: border-box;
+				box-sizing: border-box;
+			}
 		}
 	}
 
@@ -78,6 +141,8 @@
 		margin-right: 19px;
 		border-top: 1px solid #d6d6d6;
 	}
+
+
 </style>
 
 <script>

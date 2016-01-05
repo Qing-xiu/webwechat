@@ -13,9 +13,13 @@
 			</a>
 		</div>
 	</div>
-	<div class="nav-view" >
-		<chat v-show="currentView == 'chat'"></chat>
-		<contact v-show="currentView == 'contact'"></contact>
+
+	<div class="nav-view" v-show="currentView == 'chat'" >
+		<chat></chat>
+	</div>
+
+	<div class="nav-view" v-show="currentView == 'contact'" >
+		<contact></contact>
 	</div>
 </template>
 

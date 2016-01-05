@@ -1,7 +1,9 @@
 <template>
-	<div class="box" >
-		<chatarea v-show="view == 'chat'"></chatarea>
-		<contactarea v-show="view == 'contact'"></contactarea>
+	<div class="box" v-show="view == 'chat'">
+		<chatarea></chatarea>
+	</div>
+	<div class="box" v-show="view == 'contact'">
+		<contactarea></contactarea>
 	</div>
 </template>
 
