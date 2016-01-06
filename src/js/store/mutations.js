@@ -1,0 +1,3 @@
+export const CHANGEVIEW = 'CHANGVIEW'
+export const DEL_CHATLIST = 'DEL_CAHTLIST'
+export const ADD_CHATLIST = 'ADD_CAHTLIST'

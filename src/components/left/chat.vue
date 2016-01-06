@@ -1,35 +1,21 @@
 <template>
-	<div class="chat-item active">
-		<div class="item-avatar">
-			<img src="../../img/webwxgeticon.jpeg" />
-		</div>
-		<div class="item-ext">
-			<div class="ext-time">10: 32</div>
-			<div class="ext-attr">
-				<i class="iconfont">&#xe604;</i>
+	
+		<div v-for="item in chatList" class="chat-item active">
+			<div class="item-avatar">
+				<img :src="item.avatar" />
+			</div>
+			<div class="item-ext">
+				<div class="ext-time">{{item.time}}</div>
+				<div class="ext-attr">
+					<i class="iconfont">&#xe604;</i>
+				</div>
+			</div>
+			<div class="item-info">
+				<div class="info-nickname">{{item.nickname}}</div>
+				<div class="info-msg">{{item.message}}</div>
 			</div>
 		</div>
-		<div class="item-info">
-			<div class="info-nickname">有人的地方，就有江湖</div>
-			<div class="info-msg">刀圣：一刀两断（劳资的大刀早已饥渴难耐）</div>
-		</div>
-	</div>
-
-	<div class="chat-item">
-		<div class="item-avatar">
-			<img src="../../img/webwxgeticon.jpeg" />
-		</div>
-		<div class="item-ext">
-			<div class="ext-time">10: 32</div>
-			<div class="ext-attr">
-				<i class="iconfont">&#xe604;</i>
-			</div>
-		</div>
-		<div class="item-info">
-			<div class="info-nickname">有人的地方，就有江湖</div>
-			<div class="info-msg">枪圣：枪龙出海</div>
-		</div>
-	</div>
+	
 </template>
 
 <style lang="sass">
@@ -99,8 +85,15 @@
 </style>
 
 <script lang="babel">
+	import store from "../../js/store/index.js"
+
 	export default {
-		name: 'chat'
+		name: 'chat',
+		computed:{
+			chatList () {
+				return store.state.chatList
+			}
+		}
 	}
 </script>
 
