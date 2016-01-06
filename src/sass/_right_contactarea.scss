@@ -1,0 +1,104 @@
+@import "mixins";
+
+.title-wrap{
+	position: relative;
+    padding: 10px 0;
+    margin: 0 19px;
+    border-bottom: 1px solid #d6d6d6;
+    background-color: #EEE;
+    z-index: 9;
+    text-align: center;
+    .wrap-poi{
+    	
+	    height: 30px;
+	    display: inline-block;
+	    line-height: 30px;
+	    cursor:pointer;
+    }
+    .poi-count{
+    	display:inline-block;
+    	vertical-align:middle;
+    	font-size: 14px;
+    	font-weight: 400;
+    }
+    .poi-name{
+    	display:inline-block;
+    	max-width: 300px;
+    	@include text-overflow();
+    	vertical-align:middle;
+    	font-size: 14px;
+    	font-weight: 400;
+    }
+	.poi-icon{
+		vertical-align: middle;
+		color:#999;
+	}
+}
+
+.conatct-bd{
+    padding: 80px 0;
+    text-align: center;
+    .avatar{
+        font-size: 0px;
+        margin-bottom: 22px;
+        img{
+            width: 100px;
+            height: 100px;
+            border-radius: 4px;
+        }
+    }
+
+    .nickname-area{
+        .nickname{
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 25px;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+        .men{
+            color:#5da7ca
+        }
+        .women{
+            color:#dd6665
+        }
+    }
+    .signature{
+        font-size: 14px;
+        color:#888;
+    }
+
+    .meta-area{
+        text-align: left;
+        width:250px;
+        padding-left: 160px;
+        margin: 30px auto 40px;
+        font-size: 12px;
+        color:#888;
+        .item-l{
+            float: left;
+            font-size: 12px;
+            margin-right: 10px;
+        }
+
+        .item-r{
+            overflow: hidden;
+            @include text-overflow();
+            width:134px;
+        }
+    }
+
+    .button-area{
+        .send-btn{
+            display: inline-block;
+            width: 200px;
+            text-align: center;
+            height: 40px;
+            line-height: 40px;
+            background: #42AC3E;
+            color:#fff;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+    }
+}
