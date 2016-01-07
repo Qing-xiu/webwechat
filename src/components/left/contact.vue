@@ -1,92 +1,14 @@
 <template>
 	<div class="contact">
-		<div class="sort-title">A</div>
-		<div class="contact-item">
+		<div style="display:none" class="sort-title">A</div>
+
+
+		<div v-for="item in members | filterBy 'friend' in 'relation'" class="contact-item">
 			<div class="item-avatar">
-				<img src="../../img/webwxgeticon.jpeg" width="30" height="30"/>
+				<img :src="item.avatar" width="30" height="30"/>
 			</div>
 			<div class="item-info">
-				<div class="info-nickname">Ava</div>
-			</div>
-		</div>
-		<div class="contact-item">
-			<div class="item-avatar">
-				<img src="../../img/webwxgeticon.jpeg" width="30" height="30"/>
-			</div>
-			<div class="item-info">
-				<div class="info-nickname">Amiee</div>
-			</div>
-		</div>
-		<div class="contact-item">
-			<div class="item-avatar">
-				<img src="../../img/webwxgeticon.jpeg" width="30" height="30"/>
-			</div>
-			<div class="item-info">
-				<div class="info-nickname">Alvin</div>
-			</div>
-		</div>
-		<div class="contact-item">
-			<div class="item-avatar">
-				<img src="../../img/webwxgeticon.jpeg" width="30" height="30"/>
-			</div>
-			<div class="item-info">
-				<div class="info-nickname">枪龙出海</div>
-			</div>
-		</div>
-		<div class="contact-item">
-			<div class="item-avatar">
-				<img src="../../img/webwxgeticon.jpeg" width="30" height="30"/>
-			</div>
-			<div class="item-info">
-				<div class="info-nickname">一剑成名</div>
-			</div>
-		</div>
-		<div class="contact-item">
-			<div class="item-avatar">
-				<img src="../../img/webwxgeticon.jpeg" width="30" height="30"/>
-			</div>
-			<div class="item-info">
-				<div class="info-nickname">枪龙出海</div>
-			</div>
-		</div>
-		<div class="contact-item">
-			<div class="item-avatar">
-				<img src="../../img/webwxgeticon.jpeg" width="30" height="30"/>
-			</div>
-			<div class="item-info">
-				<div class="info-nickname">一剑成名</div>
-			</div>
-		</div>
-		<div class="contact-item">
-			<div class="item-avatar">
-				<img src="../../img/webwxgeticon.jpeg" width="30" height="30"/>
-			</div>
-			<div class="item-info">
-				<div class="info-nickname">枪龙出海</div>
-			</div>
-		</div>
-		<div class="contact-item">
-			<div class="item-avatar">
-				<img src="../../img/webwxgeticon.jpeg" width="30" height="30"/>
-			</div>
-			<div class="item-info">
-				<div class="info-nickname">一剑成名</div>
-			</div>
-		</div>
-		<div class="contact-item">
-			<div class="item-avatar">
-				<img src="../../img/webwxgeticon.jpeg" width="30" height="30"/>
-			</div>
-			<div class="item-info">
-				<div class="info-nickname">枪龙出海</div>
-			</div>
-		</div>
-		<div class="contact-item">
-			<div class="item-avatar">
-				<img src="../../img/webwxgeticon.jpeg" width="30" height="30"/>
-			</div>
-			<div class="item-info">
-				<div class="info-nickname">一剑成名</div>
+				<div class="info-nickname">{{item.nickname}}</div>
 			</div>
 		</div>
 	</div>
@@ -130,7 +52,13 @@
 </style>
 
 <script lang="babel">
+	import store from '../../js/store/index.js'
 	export default {
-		name: 'contact'
+		name: 'contact',
+		computed: {
+			members () {
+				return store.state.members;
+			}
+		}
 	}
 </script>

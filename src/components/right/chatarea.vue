@@ -1,38 +1,41 @@
 <template>
 	<div class="title-wrap">
 		<div class="wrap-poi">
-			<span class="poi-name">赵日天</span>
-			<span class="poi-count">(12)</span>
-			<i class="iconfont poi-icon">&#xe608;</i>
+			<span class="poi-name">{{chatInfo.nickname}}</span>
+			<span v-if="chatInfo.members.length > 1" class="poi-count">({{chatInfo.members.length}})</span>
+			<i v-if="currentChatIndex > -1" class="iconfont poi-icon">&#xe608;</i>
 		</div>
 	</div>
 
 	<div class="chat-wrapper">
 		<div class="wrapper-bd">
-			<div class="no-bubble" style="display:none">暂时没有新消息</div>
+			<div v-if="currentChatIndex == -1" class="no-bubble">未选择聊天</div>
+			
+			<template v-else>
+				<div class="bubble">
+					<div class="bubble-system">
+						<span class="system-content">15:16</span>
+					</div>
 
-			<div class="bubble">
-				<div class="bubble-system">
-					<span class="system-content">15:16</span>
-				</div>
-
-				<img class="bubble-avatar" src="../../img/webwxgeticon.jpeg" width="40" height="40" />
-				<div class="bubble-content">
-					<div class="content-nickname">哈哈镜</div>
-					<div class="content-msg">
-						<pre>经典1987复古手工小棉袄   颜色深邃蓝  喜庆红  各种碎花,经典1987复古手工小棉袄   颜色深邃蓝  喜庆红  各种碎花</pre>
+					<img class="bubble-avatar" src="../../img/webwxgeticon.jpeg" width="40" height="40" />
+					<div class="bubble-content">
+						<div class="content-nickname">哈哈镜</div>
+						<div class="content-msg">
+							<pre>经典1987复古手工小棉袄   颜色深邃蓝  喜庆红  各种碎花,经典1987复古手工小棉袄   颜色深邃蓝  喜庆红  各种碎花</pre>
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="bubble me">
-				<img class="bubble-avatar" src="../../img/webwxgeticon.jpeg" width="40" height="40" />
-				<div class="bubble-content">
-					<div class="content-msg">
-						<pre>经典1987复古手工小棉袄   颜色深邃蓝  喜庆红  各种碎花,经典1987复古手工小棉袄   颜色深邃蓝  喜庆红  各种碎花</pre>
+				<div class="bubble me">
+					<img class="bubble-avatar" src="../../img/webwxgeticon.jpeg" width="40" height="40" />
+					<div class="bubble-content">
+						<div class="content-msg">
+							<pre>经典1987复古手工小棉袄   颜色深邃蓝  喜庆红  各种碎花,经典1987复古手工小棉袄   颜色深邃蓝  喜庆红  各种碎花</pre>
+						</div>
 					</div>
 				</div>
-			</div>
+			</template>
+			
 		</div>
 	</div>
 
@@ -49,8 +52,6 @@
 			<a class="send-btn" href="javascript:;">发送</a>
 		</div>
 	</div>
-
-
 </template>
 
 <style lang="sass">
@@ -59,7 +60,27 @@
 </style>
 
 <script>
+	import store from '../../js/store/index.js'
+	import wgtMembers from './wgt_members.vue'
+
 	export default {
-		name: 'chatarea'
+		name: 'chatarea',
+		components : {
+			wgtMembers
+		},
+		computed: {
+			chatInfo () {
+				return store.state.chatList[store.state.currentChatIndex]
+			},
+			currentChatIndex () {
+				return store.state.currentChatIndex
+			},
+			members (){
+				
+				return chatInfo.members.map(() => {
+
+				})
+			}
+		}
 	}
 </script>

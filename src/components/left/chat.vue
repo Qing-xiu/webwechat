@@ -1,13 +1,13 @@
 <template>
-	
-		<div v-for="item in chatList" class="chat-item active">
+	<template v-for="item in chatList" >
+		<div class="chat-item" :class="{active: currentChatIndex == $index}" @click="toggleChat($index)" :index=$index>
 			<div class="item-avatar">
 				<img :src="item.avatar" />
 			</div>
 			<div class="item-ext">
 				<div class="ext-time">{{item.time}}</div>
 				<div class="ext-attr">
-					<i class="iconfont">&#xe604;</i>
+					<i v-if="item.locked" class="iconfont">&#xe604;</i>
 				</div>
 			</div>
 			<div class="item-info">
@@ -15,7 +15,7 @@
 				<div class="info-msg">{{item.message}}</div>
 			</div>
 		</div>
-	
+	</template>
 </template>
 
 <style lang="sass">
@@ -92,7 +92,14 @@
 		computed:{
 			chatList () {
 				return store.state.chatList
+			},
+			currentChatIndex () {
+
+				return store.state.currentChatIndex
 			}
+		},
+		methods : {
+			toggleChat : store.actions.toggleChat
 		}
 	}
 </script>

@@ -5,11 +5,14 @@ export const delChatList = ({dispatch}, index) => {
 }
 
 export const addChatList = ({dispatch}, index) => {
-	console.log('add2')
 	dispatch(types.ADD_CHATLIST, index)
 }
 
 export const changeView = ({dispatch}, v) => {
 	
 	dispatch(types.CHANGEVIEW, v)
+}
+
+export const toggleChat = ({dispatch}, index) => {
+	dispatch(types.TOGGLECHAT, index)
 }

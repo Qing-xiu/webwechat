@@ -3,7 +3,8 @@ import {CHANGEVIEW} from '../mutations.js'
 console.log(CHANGEVIEW)
 
 export const initialState =  {
-	view: 'chat'
+	view: 'chat',
+	currentChatIndex: -1,
 }
 export const initialMutations = {
 	[CHANGEVIEW] (state, v) {
