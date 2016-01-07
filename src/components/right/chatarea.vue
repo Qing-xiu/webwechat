@@ -1,11 +1,15 @@
 <template>
 	<div class="title-wrap">
 		<div class="wrap-poi">
-			<span class="poi-name">{{chatInfo.nickname}}</span>
-			<span v-if="chatInfo.members.length > 1" class="poi-count">({{chatInfo.members.length}})</span>
-			<i v-if="currentChatIndex > -1" class="iconfont poi-icon">&#xe608;</i>
+			<template v-if="currentChatIndex >= 0">
+				<span class="poi-name">{{chatInfo.nickname}}</span>
+				<span v-if="chatInfo.members.length > 1" class="poi-count">({{chatInfo.members.length}})</span>
+				<i v-if="currentChatIndex > -1" class="iconfont poi-icon">&#xe608;</i>
+			</template>
 		</div>
 	</div>
+
+	<wgtmembers :my-message="members"></wgtmembers>
 
 	<div class="chat-wrapper">
 		<div class="wrapper-bd">
@@ -61,25 +65,25 @@
 
 <script>
 	import store from '../../js/store/index.js'
-	import wgtMembers from './wgt_members.vue'
+	import wgtmembers from './wgt_members.vue'
 
 	export default {
 		name: 'chatarea',
+
 		components : {
-			wgtMembers
+			wgtmembers
 		},
 		computed: {
 			chatInfo () {
-				return store.state.chatList[store.state.currentChatIndex]
+				return this.currentChatIndex > -1 ? store.state.chatList[this.currentChatIndex] : {}
 			},
 			currentChatIndex () {
 				return store.state.currentChatIndex
 			},
 			members (){
-				
-				return chatInfo.members.map(() => {
-
-				})
+				return this.currentChatIndex > -1 ? this.chatInfo.members.map((id) => {
+					return store.state.members[id];
+				}) : []
 			}
 		}
 	}

@@ -7,6 +7,8 @@ import * as actions from "./actions.js";
 
 Vue.use(Vuex);
 
+Vue.config.debug = true
+
 const store = new Vuex.Store({
 	strict: true,
 	middlewares: [Vuex.createLogger()],
@@ -22,6 +24,6 @@ const store = new Vuex.Store({
 	actions,
 })
 
-console.log(process.env.NODE_ENV)
+
 
 export default store;
