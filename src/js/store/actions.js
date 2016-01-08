@@ -16,3 +16,7 @@ export const changeView = ({dispatch}, v) => {
 export const toggleChat = ({dispatch}, index) => {
 	dispatch(types.TOGGLECHAT, index)
 }
+
+export const toggleMemberModal = ({dispatch}) => {
+	dispatch(types.TOGGLEMEMBERMODAL)
+}

@@ -16,6 +16,7 @@ const store = new Vuex.Store({
 		members: membersState,
 		view: initialState.view,
 		currentChatIndex: initialState.currentChatIndex,
+		memberModal: initialState.memberModal,
 		chatList: chatListInitialState
 	},
 

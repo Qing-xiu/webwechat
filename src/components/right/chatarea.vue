@@ -1,6 +1,6 @@
 <template>
 	<div class="title-wrap">
-		<div class="wrap-poi">
+		<div class="wrap-poi" @click="toggleMemberModal">
 			<template v-if="currentChatIndex >= 0">
 				<span class="poi-name">{{chatInfo.nickname}}</span>
 				<span v-if="chatInfo.members.length > 1" class="poi-count">({{chatInfo.members.length}})</span>
@@ -9,7 +9,7 @@
 		</div>
 	</div>
 
-	<wgtmembers :my-message="members"></wgtmembers>
+	<wgtmembers v-show="memberModal" :my-message="members" transition="expend"></wgtmembers>
 
 	<div class="chat-wrapper">
 		<div class="wrapper-bd">
@@ -60,7 +60,14 @@
 
 <style lang="sass">
 	@import "../../sass/right_chatarea";
+	.expend-transition{
+		transition: all .3s ease;
+	}
 
+	.expend-enter, .expend-leave{
+		opacity: 0;
+		transform: translate(0, -30px);
+	}
 </style>
 
 <script>
@@ -74,6 +81,9 @@
 			wgtmembers
 		},
 		computed: {
+			memberModal () {
+				return store.state.memberModal
+			},
 			chatInfo () {
 				return this.currentChatIndex > -1 ? store.state.chatList[this.currentChatIndex] : {}
 			},
@@ -85,6 +95,10 @@
 					return store.state.members[id];
 				}) : []
 			}
+		},
+
+		methods: {
+			toggleMemberModal : store.actions.toggleMemberModal
 		}
 	}
 </script>
