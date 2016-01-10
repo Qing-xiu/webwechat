@@ -1,10 +1,10 @@
 <template>
 	<div class="user">
 		<div class="avatar">
-			<img src="../../img/webwxgeticon.jpeg" width="40" height="40" />
+			<img :src="user.avatar" width="40" height="40" />
 		</div>
 		<div class="info">
-			<span class="nickname">青阑</span>
+			<span class="nickname">{{user.nickname}}</span>
 			<a class="opt" href="#"><i class="iconfont">&#xe601;</i></a>
 		</div>
 	</div>
@@ -50,7 +50,16 @@
 </style>
 
 <script lang="babel">
+	import store from '../../js/store/index.js'
+
 	export default {
-		name: 'user'
+		name: 'user',
+
+		computed: {
+			user () {
+				
+				return store.state.members[store.state.userId];
+			}
+		}
 	}
 </script>

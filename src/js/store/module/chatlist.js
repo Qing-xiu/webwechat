@@ -6,7 +6,7 @@ export const chatListInitialState = [
 		time: "10:22",
 		nickname: '青衣门',
 		message: '金鳞岂是池中物，一遇风云变化龙',
-		members: ['001', '002', '003', '004'],
+		members: ['001', '002', '003', '004','007'],
 		isManager: true,
 		locked: true
 	},

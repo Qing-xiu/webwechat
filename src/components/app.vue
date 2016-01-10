@@ -1,5 +1,5 @@
 <template>
-	<div class="main">
+	<div class="main" @click="toggleMemberModal">
 		<div class="main-inner">
 			<left></left>
 			<right></right>
@@ -34,12 +34,22 @@
 <script lang="babel">
 	import left from './left.vue'
 	import right from './right.vue'
+	import store from '../js/store/index.js'
 
 	export default {
 		name: 'App',
 		components:{
 			left,
 			right
+		},
+
+		methods: {
+			toggleMemberModal () {
+				if(store.state.memberModal){
+					store.actions.toggleMemberModal()
+				}
+				
+			}
 		}
 	}
 </script>

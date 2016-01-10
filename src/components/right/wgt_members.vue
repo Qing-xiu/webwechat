@@ -18,7 +18,8 @@
 	.wgt-members{
 		position:absolute;
 		z-index:9;
-		width:100%;
+		right:0px;
+		left:0px;
 		top:51px;
 		padding: 10px 4px 8px 17px;
 		border-bottom:1px solid #dedede;

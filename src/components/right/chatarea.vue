@@ -1,6 +1,6 @@
 <template>
 	<div class="title-wrap">
-		<div class="wrap-poi" @click="toggleMemberModal">
+		<div class="wrap-poi" @click.stop="toggleMemberModal">
 			<template v-if="currentChatIndex >= 0">
 				<span class="poi-name">{{chatInfo.nickname}}</span>
 				<span v-if="chatInfo.members.length > 1" class="poi-count">({{chatInfo.members.length}})</span>
@@ -9,32 +9,24 @@
 		</div>
 	</div>
 
-	<wgtmembers v-show="memberModal" :my-message="members" transition="expend"></wgtmembers>
+	<wgtmembers v-show="memberModal" @click.stop :my-message="members" transition="expend"></wgtmembers>
 
 	<div class="chat-wrapper">
 		<div class="wrapper-bd">
 			<div v-if="currentChatIndex == -1" class="no-bubble">未选择聊天</div>
 			
-			<template v-else>
+			<template v-else v-for="msg in msgRecord">
+				{{msg.nickname}}
 				<div class="bubble">
 					<div class="bubble-system">
 						<span class="system-content">15:16</span>
 					</div>
 
-					<img class="bubble-avatar" src="../../img/webwxgeticon.jpeg" width="40" height="40" />
+					<img class="bubble-avatar" :src="allMembers[msg.userId].avatar" width="40" height="40" />
 					<div class="bubble-content">
-						<div class="content-nickname">哈哈镜</div>
+						<div class="content-nickname">{{allMembers[msg.userId].nickname}}</div>
 						<div class="content-msg">
-							<pre>经典1987复古手工小棉袄   颜色深邃蓝  喜庆红  各种碎花,经典1987复古手工小棉袄   颜色深邃蓝  喜庆红  各种碎花</pre>
-						</div>
-					</div>
-				</div>
-
-				<div class="bubble me">
-					<img class="bubble-avatar" src="../../img/webwxgeticon.jpeg" width="40" height="40" />
-					<div class="bubble-content">
-						<div class="content-msg">
-							<pre>经典1987复古手工小棉袄   颜色深邃蓝  喜庆红  各种碎花,经典1987复古手工小棉袄   颜色深邃蓝  喜庆红  各种碎花</pre>
+							<pre>{{allMembers[msg.userId].msg}}</pre>
 						</div>
 					</div>
 				</div>
@@ -94,11 +86,20 @@
 				return this.currentChatIndex > -1 ? this.chatInfo.members.map((id) => {
 					return store.state.members[id];
 				}) : []
+			},
+			msgRecord () {
+				return this.currentChatIndex > -1 ? store.state.msgRecord[this.currentChatIndex].list : {}
+			},
+			allMembers () {
+				return store.state.members
+			},
+			userId () {
+				return store.state.userId
 			}
 		},
 
 		methods: {
-			toggleMemberModal : store.actions.toggleMemberModal
+			toggleMemberModal: store.actions.toggleMemberModal
 		}
 	}
 </script>

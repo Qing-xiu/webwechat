@@ -12536,20 +12536,40 @@
 	
 	var _right2 = _interopRequireDefault(_right);
 	
+	var _index = __webpack_require__(24);
+	
+	var _index2 = _interopRequireDefault(_index);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	exports.default = {
+		name: 'App',
+		components: {
+			left: _left2.default,
+			right: _right2.default
+		},
+	
+		methods: {
+			toggleMemberModal: function toggleMemberModal() {
+				if (_index2.default.state.memberModal) {
+					_index2.default.actions.toggleMemberModal();
+				}
+			}
+		}
+	};
+	// </script>
 	// <template>
-	// 	<div class="main">
+	// 	<div class="main" @click="toggleMemberModal">
 	// 		<div class="main-inner">
 	// 			<left></left>
 	// 			<right></right>
 	// 		</div>
 	// 	</div>
 	// </template>
-	
+
 	// <style lang="sass">
 	// 	@import "../sass/mixins";
-	
+
 	// 	.main{
 	// 		height: 80%;
 	// 		min-height:600px;
@@ -12562,7 +12582,7 @@
 	// 			@include clearfix();
 	// 		}
 	// 	}
-	
+
 	// 	@media (max-width: 1000px), (max-height: 800px){
 	// 		.main{
 	// 			padding-top:0px;
@@ -12570,16 +12590,8 @@
 	// 		}
 	// 	}
 	// </style>
-	
+
 	// <script lang="babel">
-	exports.default = {
-		name: 'App',
-		components: {
-			left: _left2.default,
-			right: _right2.default
-		}
-	};
-	// </script>
 
 /***/ },
 /* 10 */
@@ -12762,34 +12774,52 @@
 
 /***/ },
 /* 17 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
+	
+	var _index = __webpack_require__(24);
+	
+	var _index2 = _interopRequireDefault(_index);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+		name: 'user',
+	
+		computed: {
+			user: function user() {
+	
+				return _index2.default.state.members[_index2.default.state.userId];
+			}
+		}
+	};
+	// </script>
 	// <template>
 	// 	<div class="user">
 	// 		<div class="avatar">
-	// 			<img src="../../img/webwxgeticon.jpeg" width="40" height="40" />
+	// 			<img :src="user.avatar" width="40" height="40" />
 	// 		</div>
 	// 		<div class="info">
-	// 			<span class="nickname">青阑</span>
+	// 			<span class="nickname">{{user.nickname}}</span>
 	// 			<a class="opt" href="#"><i class="iconfont">&#xe601;</i></a>
 	// 		</div>
 	// 	</div>
 	// </template>
-	
+
 	// <style lang="sass">
 	// 	@import "../../sass/mixins";
-	
+
 	// 	.user{
 	// 		padding: 18px;
 	// 		@include clearfix();
 	// 		height: 40px;
 	// 		line-height:40px;
-	
+
 	// 		.avatar{
 	// 			display:inline-block;
 	// 			vertical-align: middle;
@@ -12817,20 +12847,16 @@
 	// 			}
 	// 		}
 	// 	}
-	
+
 	// </style>
-	
+
 	// <script lang="babel">
-	exports.default = {
-		name: 'user'
-	};
-	// </script>
 
 /***/ },
 /* 18 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	module.exports = "\n\t<div class=\"user\">\n\t\t<div class=\"avatar\">\n\t\t\t<img src=\"" + __webpack_require__(19) + "\" width=\"40\" height=\"40\" />\n\t\t</div>\n\t\t<div class=\"info\">\n\t\t\t<span class=\"nickname\">青阑</span>\n\t\t\t<a class=\"opt\" href=\"#\"><i class=\"iconfont\">&#xe601;</i></a>\n\t\t</div>\n\t</div>\n";
+	module.exports = "\n\t<div class=\"user\">\n\t\t<div class=\"avatar\">\n\t\t\t<img :src=\"user.avatar\" width=\"40\" height=\"40\" />\n\t\t</div>\n\t\t<div class=\"info\">\n\t\t\t<span class=\"nickname\">{{user.nickname}}</span>\n\t\t\t<a class=\"opt\" href=\"#\"><i class=\"iconfont\">&#xe601;</i></a>\n\t\t</div>\n\t</div>\n";
 
 /***/ },
 /* 19 */
@@ -12989,6 +13015,8 @@
 	
 	var _members = __webpack_require__(36);
 	
+	var _msgrecord = __webpack_require__(83);
+	
 	var _actions = __webpack_require__(37);
 	
 	var actions = _interopRequireWildcard(_actions);
@@ -13005,11 +13033,13 @@
 		strict: true,
 		middlewares: [_vuex2.default.createLogger()],
 		state: {
+			userId: '007',
 			members: _members.membersState,
 			view: _initial.initialState.view,
 			currentChatIndex: _initial.initialState.currentChatIndex,
 			memberModal: _initial.initialState.memberModal,
-			chatList: _chatlist.chatListInitialState
+			chatList: _chatlist.chatListInitialState,
+			msgRecord: _msgrecord.msgrecordState
 		},
 	
 		mutations: [_chatlist.chatListMutations, _initial.initialMutations],
@@ -13528,7 +13558,7 @@
 		time: "10:22",
 		nickname: '青衣门',
 		message: '金鳞岂是池中物，一遇风云变化龙',
-		members: ['001', '002', '003', '004'],
+		members: ['001', '002', '003', '004', '007'],
 		isManager: true,
 		locked: true
 	}, {
@@ -13712,6 +13742,23 @@
 			gender: 'man',
 			relation: 'friend',
 			meta: [{ label: '备注', value: '潇湘剑客' }]
+		},
+	
+		"006": {
+			avatar: 'http://imgsrc.baidu.com/forum/w%3D580/sign=c23b544b113853438ccf8729a313b01f/0a3fa18b87d6277f693e951f29381f30e924fcac.jpg',
+			nickname: '王语嫣',
+			gender: 'man',
+			relation: 'friend',
+			meta: [{ label: '备注', value: '美女' }]
+		},
+	
+		"007": {
+			avatar: 'http://imgsrc.baidu.com/forum/w%3D580/sign=878c1895b8014a90813e46b599763971/1a34304e251f95ca48533591c8177f3e67095235.jpg',
+			nickname: '扫地僧',
+			gender: 'man',
+			relation: 'friend',
+	
+			meta: [{ label: '备注', value: '都是垃圾' }]
 		}
 	};
 
@@ -14502,7 +14549,7 @@
 	
 	// <template>
 	// 	<div class="title-wrap">
-	// 		<div class="wrap-poi" @click="toggleMemberModal">
+	// 		<div class="wrap-poi" @click.stop="toggleMemberModal">
 	// 			<template v-if="currentChatIndex >= 0">
 	// 				<span class="poi-name">{{chatInfo.nickname}}</span>
 	// 				<span v-if="chatInfo.members.length > 1" class="poi-count">({{chatInfo.members.length}})</span>
@@ -14511,32 +14558,24 @@
 	// 		</div>
 	// 	</div>
 	
-	// 	<wgtmembers v-show="memberModal" :my-message="members" transition="expend"></wgtmembers>
+	// 	<wgtmembers v-show="memberModal" @click.stop :my-message="members" transition="expend"></wgtmembers>
 	
 	// 	<div class="chat-wrapper">
 	// 		<div class="wrapper-bd">
 	// 			<div v-if="currentChatIndex == -1" class="no-bubble">未选择聊天</div>
 	
-	// 			<template v-else>
+	// 			<template v-else v-for="msg in msgRecord">
+	// 				{{msg.nickname}}
 	// 				<div class="bubble">
 	// 					<div class="bubble-system">
 	// 						<span class="system-content">15:16</span>
 	// 					</div>
 	
-	// 					<img class="bubble-avatar" src="../../img/webwxgeticon.jpeg" width="40" height="40" />
+	// 					<img class="bubble-avatar" :src="allMembers[msg.userId].avatar" width="40" height="40" />
 	// 					<div class="bubble-content">
-	// 						<div class="content-nickname">哈哈镜</div>
+	// 						<div class="content-nickname">{{allMembers[msg.userId].nickname}}</div>
 	// 						<div class="content-msg">
-	// 							<pre>经典1987复古手工小棉袄   颜色深邃蓝  喜庆红  各种碎花,经典1987复古手工小棉袄   颜色深邃蓝  喜庆红  各种碎花</pre>
-	// 						</div>
-	// 					</div>
-	// 				</div>
-	
-	// 				<div class="bubble me">
-	// 					<img class="bubble-avatar" src="../../img/webwxgeticon.jpeg" width="40" height="40" />
-	// 					<div class="bubble-content">
-	// 						<div class="content-msg">
-	// 							<pre>经典1987复古手工小棉袄   颜色深邃蓝  喜庆红  各种碎花,经典1987复古手工小棉袄   颜色深邃蓝  喜庆红  各种碎花</pre>
+	// 							<pre>{{allMembers[msg.userId].msg}}</pre>
 	// 						</div>
 	// 					</div>
 	// 				</div>
@@ -14593,6 +14632,15 @@
 				return this.currentChatIndex > -1 ? this.chatInfo.members.map(function (id) {
 					return _index2.default.state.members[id];
 				}) : [];
+			},
+			msgRecord: function msgRecord() {
+				return this.currentChatIndex > -1 ? _index2.default.state.msgRecord[this.currentChatIndex].list : {};
+			},
+			allMembers: function allMembers() {
+				return _index2.default.state.members;
+			},
+			userId: function userId() {
+				return _index2.default.state.userId;
 			}
 		},
 	
@@ -14661,7 +14709,7 @@
 	
 	
 	// module
-	exports.push([module.id, ".wgt-members {\n  position: absolute;\n  z-index: 9;\n  width: 100%;\n  top: 51px;\n  padding: 10px 4px 8px 17px;\n  border-bottom: 1px solid #dedede;\n  background: #eee;\n  font-size: 0px; }\n  .wgt-members .member {\n    display: inline-block;\n    height: 85px;\n    padding-top: 10px;\n    margin: 0 7px;\n    vertical-align: middle;\n    text-align: center; }\n  .wgt-members .opt {\n    width: 55px;\n    height: 55px;\n    text-align: center;\n    line-height: 55px;\n    border: 1px dashed #bbb; }\n    .wgt-members .opt .iconfont {\n      font-size: 28px; }\n  .wgt-members .member-avatar {\n    display: block;\n    height: 55px;\n    width: 55px;\n    background: #ccc;\n    cursor: pointer;\n    text-align: center; }\n  .wgt-members .member-nickname {\n    width: 72px;\n    text-align: center;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    height: 30px;\n    line-height: 30px;\n    margin-left: -8px;\n    font-size: 12px; }\n", "", {"version":3,"sources":["/./src/components/right/wgt_members.vue.style"],"names":[],"mappings":"AAAA;EACE,mBAAmB;EACnB,WAAW;EACX,YAAY;EACZ,UAAU;EACV,2BAA2B;EAC3B,iCAAiC;EACjC,iBAAiB;EACjB,eAAe,EAAE;EACjB;IACE,sBAAsB;IACtB,aAAa;IACb,kBAAkB;IAClB,cAAc;IACd,uBAAuB;IACvB,mBAAmB,EAAE;EACvB;IACE,YAAY;IACZ,aAAa;IACb,mBAAmB;IACnB,kBAAkB;IAClB,wBAAwB,EAAE;IAC1B;MACE,gBAAgB,EAAE;EACtB;IACE,eAAe;IACf,aAAa;IACb,YAAY;IACZ,iBAAiB;IACjB,gBAAgB;IAChB,mBAAmB,EAAE;EACvB;IACE,YAAY;IACZ,mBAAmB;IACnB,oBAAoB;IACpB,iBAAiB;IACjB,wBAAwB;IACxB,aAAa;IACb,kBAAkB;IAClB,kBAAkB;IAClB,gBAAgB,EAAE","file":"wgt_members.vue","sourcesContent":[".wgt-members {\n  position: absolute;\n  z-index: 9;\n  width: 100%;\n  top: 51px;\n  padding: 10px 4px 8px 17px;\n  border-bottom: 1px solid #dedede;\n  background: #eee;\n  font-size: 0px; }\n  .wgt-members .member {\n    display: inline-block;\n    height: 85px;\n    padding-top: 10px;\n    margin: 0 7px;\n    vertical-align: middle;\n    text-align: center; }\n  .wgt-members .opt {\n    width: 55px;\n    height: 55px;\n    text-align: center;\n    line-height: 55px;\n    border: 1px dashed #bbb; }\n    .wgt-members .opt .iconfont {\n      font-size: 28px; }\n  .wgt-members .member-avatar {\n    display: block;\n    height: 55px;\n    width: 55px;\n    background: #ccc;\n    cursor: pointer;\n    text-align: center; }\n  .wgt-members .member-nickname {\n    width: 72px;\n    text-align: center;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    height: 30px;\n    line-height: 30px;\n    margin-left: -8px;\n    font-size: 12px; }\n"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, ".wgt-members {\n  position: absolute;\n  z-index: 9;\n  right: 0px;\n  left: 0px;\n  top: 51px;\n  padding: 10px 4px 8px 17px;\n  border-bottom: 1px solid #dedede;\n  background: #eee;\n  font-size: 0px; }\n  .wgt-members .member {\n    display: inline-block;\n    height: 85px;\n    padding-top: 10px;\n    margin: 0 7px;\n    vertical-align: middle;\n    text-align: center; }\n  .wgt-members .opt {\n    width: 55px;\n    height: 55px;\n    text-align: center;\n    line-height: 55px;\n    border: 1px dashed #bbb; }\n    .wgt-members .opt .iconfont {\n      font-size: 28px; }\n  .wgt-members .member-avatar {\n    display: block;\n    height: 55px;\n    width: 55px;\n    background: #ccc;\n    cursor: pointer;\n    text-align: center; }\n  .wgt-members .member-nickname {\n    width: 72px;\n    text-align: center;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    height: 30px;\n    line-height: 30px;\n    margin-left: -8px;\n    font-size: 12px; }\n", "", {"version":3,"sources":["/./src/components/right/wgt_members.vue.style"],"names":[],"mappings":"AAAA;EACE,mBAAmB;EACnB,WAAW;EACX,WAAW;EACX,UAAU;EACV,UAAU;EACV,2BAA2B;EAC3B,iCAAiC;EACjC,iBAAiB;EACjB,eAAe,EAAE;EACjB;IACE,sBAAsB;IACtB,aAAa;IACb,kBAAkB;IAClB,cAAc;IACd,uBAAuB;IACvB,mBAAmB,EAAE;EACvB;IACE,YAAY;IACZ,aAAa;IACb,mBAAmB;IACnB,kBAAkB;IAClB,wBAAwB,EAAE;IAC1B;MACE,gBAAgB,EAAE;EACtB;IACE,eAAe;IACf,aAAa;IACb,YAAY;IACZ,iBAAiB;IACjB,gBAAgB;IAChB,mBAAmB,EAAE;EACvB;IACE,YAAY;IACZ,mBAAmB;IACnB,oBAAoB;IACpB,iBAAiB;IACjB,wBAAwB;IACxB,aAAa;IACb,kBAAkB;IAClB,kBAAkB;IAClB,gBAAgB,EAAE","file":"wgt_members.vue","sourcesContent":[".wgt-members {\n  position: absolute;\n  z-index: 9;\n  right: 0px;\n  left: 0px;\n  top: 51px;\n  padding: 10px 4px 8px 17px;\n  border-bottom: 1px solid #dedede;\n  background: #eee;\n  font-size: 0px; }\n  .wgt-members .member {\n    display: inline-block;\n    height: 85px;\n    padding-top: 10px;\n    margin: 0 7px;\n    vertical-align: middle;\n    text-align: center; }\n  .wgt-members .opt {\n    width: 55px;\n    height: 55px;\n    text-align: center;\n    line-height: 55px;\n    border: 1px dashed #bbb; }\n    .wgt-members .opt .iconfont {\n      font-size: 28px; }\n  .wgt-members .member-avatar {\n    display: block;\n    height: 55px;\n    width: 55px;\n    background: #ccc;\n    cursor: pointer;\n    text-align: center; }\n  .wgt-members .member-nickname {\n    width: 72px;\n    text-align: center;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    height: 30px;\n    line-height: 30px;\n    margin-left: -8px;\n    font-size: 12px; }\n"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -14695,7 +14743,8 @@
 	// 	.wgt-members{
 	// 		position:absolute;
 	// 		z-index:9;
-	// 		width:100%;
+	// 		right:0px;
+	// 		left:0px;
 	// 		top:51px;
 	// 		padding: 10px 4px 8px 17px;
 	// 		border-bottom:1px solid #dedede;
@@ -14762,9 +14811,9 @@
 
 /***/ },
 /* 68 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	module.exports = "\n\t<div class=\"title-wrap\">\n\t\t<div class=\"wrap-poi\" @click=\"toggleMemberModal\">\n\t\t\t<template v-if=\"currentChatIndex >= 0\">\n\t\t\t\t<span class=\"poi-name\">{{chatInfo.nickname}}</span>\n\t\t\t\t<span v-if=\"chatInfo.members.length > 1\" class=\"poi-count\">({{chatInfo.members.length}})</span>\n\t\t\t\t<i v-if=\"currentChatIndex > -1\" class=\"iconfont poi-icon\">&#xe608;</i>\n\t\t\t</template>\n\t\t</div>\n\t</div>\n\n\t<wgtmembers v-show=\"memberModal\" :my-message=\"members\" transition=\"expend\"></wgtmembers>\n\n\t<div class=\"chat-wrapper\">\n\t\t<div class=\"wrapper-bd\">\n\t\t\t<div v-if=\"currentChatIndex == -1\" class=\"no-bubble\">未选择聊天</div>\n\t\t\t\n\t\t\t<template v-else>\n\t\t\t\t<div class=\"bubble\">\n\t\t\t\t\t<div class=\"bubble-system\">\n\t\t\t\t\t\t<span class=\"system-content\">15:16</span>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t<img class=\"bubble-avatar\" src=\"" + __webpack_require__(19) + "\" width=\"40\" height=\"40\" />\n\t\t\t\t\t<div class=\"bubble-content\">\n\t\t\t\t\t\t<div class=\"content-nickname\">哈哈镜</div>\n\t\t\t\t\t\t<div class=\"content-msg\">\n\t\t\t\t\t\t\t<pre>经典1987复古手工小棉袄   颜色深邃蓝  喜庆红  各种碎花,经典1987复古手工小棉袄   颜色深邃蓝  喜庆红  各种碎花</pre>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"bubble me\">\n\t\t\t\t\t<img class=\"bubble-avatar\" src=\"" + __webpack_require__(19) + "\" width=\"40\" height=\"40\" />\n\t\t\t\t\t<div class=\"bubble-content\">\n\t\t\t\t\t\t<div class=\"content-msg\">\n\t\t\t\t\t\t\t<pre>经典1987复古手工小棉袄   颜色深邃蓝  喜庆红  各种碎花,经典1987复古手工小棉袄   颜色深邃蓝  喜庆红  各种碎花</pre>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</template>\n\t\t\t\n\t\t</div>\n\t</div>\n\n\t<div class=\"chat-ft\">\n\t\t<div class=\"tool-bar\">\n\t\t\t<a class=\"bar-item\" href=\"\"><i class=\"iconfont\">&#xe60e;</i></a>\n\t\t\t<a class=\"bar-item\" href=\"\"><i class=\"iconfont\">&#xe607;</i></a>\n\t\t</div>\n\n\t\t<pre class=\"edit-area\" contenteditable=\"true\"></pre>\n\n\t\t<div class=\"action\">\n\t\t\t<span class=\"macos-hint\">按下Cmd+Enter换行</span>\n\t\t\t<a class=\"send-btn\" href=\"javascript:;\">发送</a>\n\t\t</div>\n\t</div>\n";
+	module.exports = "\n\t<div class=\"title-wrap\">\n\t\t<div class=\"wrap-poi\" @click.stop=\"toggleMemberModal\">\n\t\t\t<template v-if=\"currentChatIndex >= 0\">\n\t\t\t\t<span class=\"poi-name\">{{chatInfo.nickname}}</span>\n\t\t\t\t<span v-if=\"chatInfo.members.length > 1\" class=\"poi-count\">({{chatInfo.members.length}})</span>\n\t\t\t\t<i v-if=\"currentChatIndex > -1\" class=\"iconfont poi-icon\">&#xe608;</i>\n\t\t\t</template>\n\t\t</div>\n\t</div>\n\n\t<wgtmembers v-show=\"memberModal\" @click.stop :my-message=\"members\" transition=\"expend\"></wgtmembers>\n\n\t<div class=\"chat-wrapper\">\n\t\t<div class=\"wrapper-bd\">\n\t\t\t<div v-if=\"currentChatIndex == -1\" class=\"no-bubble\">未选择聊天</div>\n\t\t\t\n\t\t\t<template v-else v-for=\"msg in msgRecord\">\n\t\t\t\t{{msg.nickname}}\n\t\t\t\t<div class=\"bubble\">\n\t\t\t\t\t<div class=\"bubble-system\">\n\t\t\t\t\t\t<span class=\"system-content\">15:16</span>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t<img class=\"bubble-avatar\" :src=\"allMembers[msg.userId].avatar\" width=\"40\" height=\"40\" />\n\t\t\t\t\t<div class=\"bubble-content\">\n\t\t\t\t\t\t<div class=\"content-nickname\">{{allMembers[msg.userId].nickname}}</div>\n\t\t\t\t\t\t<div class=\"content-msg\">\n\t\t\t\t\t\t\t<pre>{{allMembers[msg.userId].msg}}</pre>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</template>\n\t\t\t\n\t\t</div>\n\t</div>\n\n\t<div class=\"chat-ft\">\n\t\t<div class=\"tool-bar\">\n\t\t\t<a class=\"bar-item\" href=\"\"><i class=\"iconfont\">&#xe60e;</i></a>\n\t\t\t<a class=\"bar-item\" href=\"\"><i class=\"iconfont\">&#xe607;</i></a>\n\t\t</div>\n\n\t\t<pre class=\"edit-area\" contenteditable=\"true\"></pre>\n\n\t\t<div class=\"action\">\n\t\t\t<span class=\"macos-hint\">按下Cmd+Enter换行</span>\n\t\t\t<a class=\"send-btn\" href=\"javascript:;\">发送</a>\n\t\t</div>\n\t</div>\n";
 
 /***/ },
 /* 69 */
@@ -14899,7 +14948,7 @@
 /* 75 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\t<div class=\"main\">\n\t\t<div class=\"main-inner\">\n\t\t\t<left></left>\n\t\t\t<right></right>\n\t\t</div>\n\t</div>\n";
+	module.exports = "\n\t<div class=\"main\" @click=\"toggleMemberModal\">\n\t\t<div class=\"main-inner\">\n\t\t\t<left></left>\n\t\t\t<right></right>\n\t\t</div>\n\t</div>\n";
 
 /***/ },
 /* 76 */
@@ -14970,6 +15019,38 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "../build/font/iconfont.svg";
+
+/***/ },
+/* 83 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	var msgrecordState = exports.msgrecordState = [{
+		list: [{
+			msg: '江畔何人初见月',
+			time: 1452419766358,
+			userId: '007',
+			type: 'text'
+		}, {
+			msg: '江月何年初照人',
+			time: 1452423989314,
+			userId: '001',
+			type: 'text'
+		}, {
+			msg: '好诗！好诗！',
+			time: 1452424015009,
+			userId: '002',
+			type: 'text'
+		}]
+	}, {
+		list: []
+	}];
+	
+	var msgrecordMutations = exports.msgrecordMutations = {};
 
 /***/ }
 /******/ ]);
