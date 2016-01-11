@@ -13,20 +13,22 @@
 
 	<div class="chat-wrapper">
 		<div class="wrapper-bd">
-			<div v-if="currentChatIndex == -1" class="no-bubble">未选择聊天</div>
-			
-			<template v-else v-for="msg in msgRecord">
-				{{msg.nickname}}
-				<div class="bubble">
-					<div class="bubble-system">
-						<span class="system-content">15:16</span>
-					</div>
 
-					<img class="bubble-avatar" :src="allMembers[msg.userId].avatar" width="40" height="40" />
-					<div class="bubble-content">
-						<div class="content-nickname">{{allMembers[msg.userId].nickname}}</div>
-						<div class="content-msg">
-							<pre>{{allMembers[msg.userId].msg}}</pre>
+			<div v-if="currentChatIndex == -1" class="no-bubble">未选择聊天</div>
+			<template v-else>
+				<div v-if="msgRecord.length < 1" class="no-bubble">暂时没有新消息</div>
+				<div v-else class="clearfix" v-for="msg in msgRecord" >
+					<div class="bubble" :class="{me: msg.userId == userId}">
+						<div class="bubble-system">
+							<span class="system-content">{{msg.time | dateBy}}</span>
+						</div>
+
+						<img class="bubble-avatar" :src="allMembers[msg.userId].avatar" width="40" height="40" />
+						<div class="bubble-content">
+							<div class="content-nickname">{{allMembers[msg.userId].nickname}}</div>
+							<div class="content-msg">
+								<pre>{{msg.msg}}</pre>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -65,6 +67,16 @@
 <script>
 	import store from '../../js/store/index.js'
 	import wgtmembers from './wgt_members.vue'
+
+	import Vue from 'vue'
+
+	Vue.filter('dateBy', function(v){
+		var date = new Date(v),
+			hours = date.getHours() + '',
+			minutes = date.getMinutes() + '';
+			console.log(hours.length)
+		return (hours.length > 1 ? hours : '0' + hours) + ' : ' + ( minutes.length > 1 ? minutes : '0' + minutes )
+	})
 
 	export default {
 		name: 'chatarea',
