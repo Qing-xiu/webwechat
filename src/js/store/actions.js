@@ -20,3 +20,7 @@ export const toggleChat = ({dispatch}, index) => {
 export const toggleMemberModal = ({dispatch}) => {
 	dispatch(types.TOGGLEMEMBERMODAL)
 }
+
+export const publishMsg = ({dispatch}, msg) => {
+	dispatch(types.PUBLISH_MSG, msg)
+}

@@ -25,7 +25,7 @@
 
 						<img class="bubble-avatar" :src="allMembers[msg.userId].avatar" width="40" height="40" />
 						<div class="bubble-content">
-							<div class="content-nickname">{{allMembers[msg.userId].nickname}}</div>
+							<div v-if="msg.userId != userId" class="content-nickname">{{allMembers[msg.userId].nickname}}</div>
 							<div class="content-msg">
 								<pre>{{msg.msg}}</pre>
 							</div>
@@ -43,7 +43,7 @@
 			<a class="bar-item" href=""><i class="iconfont">&#xe607;</i></a>
 		</div>
 
-		<pre class="edit-area" contenteditable="true"></pre>
+		<pre class="edit-area" contenteditable="true" @keyup.enter.prevent="publishMsg($event.target.innerHTML)"></pre>
 
 		<div class="action">
 			<span class="macos-hint">按下Cmd+Enter换行</span>
@@ -111,7 +111,8 @@
 		},
 
 		methods: {
-			toggleMemberModal: store.actions.toggleMemberModal
+			toggleMemberModal: store.actions.toggleMemberModal,
+			publishMsg: store.actions.publishMsg
 		}
 	}
 </script>

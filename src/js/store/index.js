@@ -23,7 +23,7 @@ const store = new Vuex.Store({
 		msgRecord: msgrecordState
 	},
 
-	mutations: [chatListMutations, initialMutations],
+	mutations: [chatListMutations, initialMutations, msgrecordMutations],
 	
 	actions,
 })

@@ -1,3 +1,5 @@
+import {PUBLISH_MSG} from '../mutations.js'
+
 export const msgrecordState = [
 	{
 		list: [
@@ -29,5 +31,11 @@ export const msgrecordState = [
 ]
 
 export const msgrecordMutations = {
-
+	[PUBLISH_MSG] (state, msg) {
+		state.msgRecord[state.currentChatIndex].list.push({
+			msg: msg,
+			time: Date.now(),
+			userId: state.userId
+		})
+	}
 }
