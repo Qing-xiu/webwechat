@@ -11,7 +11,7 @@
 
 	<wgtmembers v-show="memberModal" @click.stop :my-message="members" transition="expend"></wgtmembers>
 
-	<div class="chat-wrapper">
+	<div id="chatWrapper" class="chat-wrapper">
 		<div class="wrapper-bd">
 
 			<div v-if="currentChatIndex == -1" class="no-bubble">未选择聊天</div>
@@ -27,7 +27,7 @@
 						<div class="bubble-content">
 							<div v-if="msg.userId != userId" class="content-nickname">{{allMembers[msg.userId].nickname}}</div>
 							<div class="content-msg">
-								<pre>{{msg.msg}}</pre>
+								<pre>{{{msg.msg}}}</pre>
 							</div>
 						</div>
 					</div>
@@ -43,7 +43,7 @@
 			<a class="bar-item" href=""><i class="iconfont">&#xe607;</i></a>
 		</div>
 
-		<pre class="edit-area" contenteditable="true" @keyup.enter.prevent="publishMsg($event.target.innerHTML)"></pre>
+		<pre class="edit-area" contenteditable="true" @keyup="publishMsg($event)" @keydown="keydownEvent($event)" ></pre>
 
 		<div class="action">
 			<span class="macos-hint">按下Cmd+Enter换行</span>
@@ -112,7 +112,32 @@
 
 		methods: {
 			toggleMemberModal: store.actions.toggleMemberModal,
-			publishMsg: store.actions.publishMsg
+			keydownEvent (e) {
+				if(e.keyCode == 13 && !e.shiftKey){
+					e.preventDefault();
+
+					var msg = e.target.innerHTML;
+
+					if(msg == '') return;
+					e.target.innerHTML = '';
+					store.actions.publishMsg(msg);
+				}
+			},
+			publishMsg (e) {
+			}
+		},
+
+		watch: {
+			msgRecord () {
+				var wrapper = document.querySelector('#chatWrapper');
+				wrapper.scrollTop = wrapper.scrollHeight;
+			}
+		},
+
+		events: {
+			scrollToBottom () {
+
+			}
 		}
 	}
 </script>

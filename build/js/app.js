@@ -14619,7 +14619,7 @@
 	
 	// 	<wgtmembers v-show="memberModal" @click.stop :my-message="members" transition="expend"></wgtmembers>
 	
-	// 	<div class="chat-wrapper">
+	// 	<div id="chatWrapper" class="chat-wrapper">
 	// 		<div class="wrapper-bd">
 	
 	// 			<div v-if="currentChatIndex == -1" class="no-bubble">未选择聊天</div>
@@ -14635,7 +14635,7 @@
 	// 						<div class="bubble-content">
 	// 							<div v-if="msg.userId != userId" class="content-nickname">{{allMembers[msg.userId].nickname}}</div>
 	// 							<div class="content-msg">
-	// 								<pre>{{msg.msg}}</pre>
+	// 								<pre>{{{msg.msg}}}</pre>
 	// 							</div>
 	// 						</div>
 	// 					</div>
@@ -14651,7 +14651,7 @@
 	// 			<a class="bar-item" href=""><i class="iconfont">&#xe607;</i></a>
 	// 		</div>
 	
-	// 		<pre class="edit-area" contenteditable="true" @keyup.enter.prevent="publishMsg($event.target.innerHTML)"></pre>
+	// 		<pre class="edit-area" contenteditable="true" @keyup="publishMsg($event)" @keydown="keydownEvent($event)" ></pre>
 	
 	// 		<div class="action">
 	// 			<span class="macos-hint">按下Cmd+Enter换行</span>
@@ -14708,7 +14708,29 @@
 	
 		methods: {
 			toggleMemberModal: _index2.default.actions.toggleMemberModal,
-			publishMsg: _index2.default.actions.publishMsg
+			keydownEvent: function keydownEvent(e) {
+				if (e.keyCode == 13 && !e.shiftKey) {
+					e.preventDefault();
+	
+					var msg = e.target.innerHTML;
+	
+					if (msg == '') return;
+					e.target.innerHTML = '';
+					_index2.default.actions.publishMsg(msg);
+				}
+			},
+			publishMsg: function publishMsg(e) {}
+		},
+	
+		watch: {
+			msgRecord: function msgRecord() {
+				var wrapper = document.querySelector('#chatWrapper');
+				wrapper.scrollTop = wrapper.scrollHeight;
+			}
+		},
+	
+		events: {
+			scrollToBottom: function scrollToBottom() {}
 		}
 	};
 	// </script>
@@ -14876,7 +14898,7 @@
 /* 68 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\t<div class=\"title-wrap\">\n\t\t<div class=\"wrap-poi\" @click.stop=\"toggleMemberModal\">\n\t\t\t<template v-if=\"currentChatIndex >= 0\">\n\t\t\t\t<span class=\"poi-name\">{{chatInfo.nickname}}</span>\n\t\t\t\t<span v-if=\"chatInfo.members.length > 1\" class=\"poi-count\">({{chatInfo.members.length}})</span>\n\t\t\t\t<i v-if=\"currentChatIndex > -1\" class=\"iconfont poi-icon\">&#xe608;</i>\n\t\t\t</template>\n\t\t</div>\n\t</div>\n\n\t<wgtmembers v-show=\"memberModal\" @click.stop :my-message=\"members\" transition=\"expend\"></wgtmembers>\n\n\t<div class=\"chat-wrapper\">\n\t\t<div class=\"wrapper-bd\">\n\n\t\t\t<div v-if=\"currentChatIndex == -1\" class=\"no-bubble\">未选择聊天</div>\n\t\t\t<template v-else>\n\t\t\t\t<div v-if=\"msgRecord.length < 1\" class=\"no-bubble\">暂时没有新消息</div>\n\t\t\t\t<div v-else class=\"clearfix\" v-for=\"msg in msgRecord\" >\n\t\t\t\t\t<div class=\"bubble\" :class=\"{me: msg.userId == userId}\">\n\t\t\t\t\t\t<div class=\"bubble-system\">\n\t\t\t\t\t\t\t<span class=\"system-content\">{{msg.time | dateBy}}</span>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<img class=\"bubble-avatar\" :src=\"allMembers[msg.userId].avatar\" width=\"40\" height=\"40\" />\n\t\t\t\t\t\t<div class=\"bubble-content\">\n\t\t\t\t\t\t\t<div v-if=\"msg.userId != userId\" class=\"content-nickname\">{{allMembers[msg.userId].nickname}}</div>\n\t\t\t\t\t\t\t<div class=\"content-msg\">\n\t\t\t\t\t\t\t\t<pre>{{msg.msg}}</pre>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</template>\n\t\t\t\n\t\t</div>\n\t</div>\n\n\t<div class=\"chat-ft\">\n\t\t<div class=\"tool-bar\">\n\t\t\t<a class=\"bar-item\" href=\"\"><i class=\"iconfont\">&#xe60e;</i></a>\n\t\t\t<a class=\"bar-item\" href=\"\"><i class=\"iconfont\">&#xe607;</i></a>\n\t\t</div>\n\n\t\t<pre class=\"edit-area\" contenteditable=\"true\" @keyup.enter.prevent=\"publishMsg($event.target.innerHTML)\"></pre>\n\n\t\t<div class=\"action\">\n\t\t\t<span class=\"macos-hint\">按下Cmd+Enter换行</span>\n\t\t\t<a class=\"send-btn\" href=\"javascript:;\">发送</a>\n\t\t</div>\n\t</div>\n";
+	module.exports = "\n\t<div class=\"title-wrap\">\n\t\t<div class=\"wrap-poi\" @click.stop=\"toggleMemberModal\">\n\t\t\t<template v-if=\"currentChatIndex >= 0\">\n\t\t\t\t<span class=\"poi-name\">{{chatInfo.nickname}}</span>\n\t\t\t\t<span v-if=\"chatInfo.members.length > 1\" class=\"poi-count\">({{chatInfo.members.length}})</span>\n\t\t\t\t<i v-if=\"currentChatIndex > -1\" class=\"iconfont poi-icon\">&#xe608;</i>\n\t\t\t</template>\n\t\t</div>\n\t</div>\n\n\t<wgtmembers v-show=\"memberModal\" @click.stop :my-message=\"members\" transition=\"expend\"></wgtmembers>\n\n\t<div id=\"chatWrapper\" class=\"chat-wrapper\">\n\t\t<div class=\"wrapper-bd\">\n\n\t\t\t<div v-if=\"currentChatIndex == -1\" class=\"no-bubble\">未选择聊天</div>\n\t\t\t<template v-else>\n\t\t\t\t<div v-if=\"msgRecord.length < 1\" class=\"no-bubble\">暂时没有新消息</div>\n\t\t\t\t<div v-else class=\"clearfix\" v-for=\"msg in msgRecord\" >\n\t\t\t\t\t<div class=\"bubble\" :class=\"{me: msg.userId == userId}\">\n\t\t\t\t\t\t<div class=\"bubble-system\">\n\t\t\t\t\t\t\t<span class=\"system-content\">{{msg.time | dateBy}}</span>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<img class=\"bubble-avatar\" :src=\"allMembers[msg.userId].avatar\" width=\"40\" height=\"40\" />\n\t\t\t\t\t\t<div class=\"bubble-content\">\n\t\t\t\t\t\t\t<div v-if=\"msg.userId != userId\" class=\"content-nickname\">{{allMembers[msg.userId].nickname}}</div>\n\t\t\t\t\t\t\t<div class=\"content-msg\">\n\t\t\t\t\t\t\t\t<pre>{{{msg.msg}}}</pre>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</template>\n\t\t\t\n\t\t</div>\n\t</div>\n\n\t<div class=\"chat-ft\">\n\t\t<div class=\"tool-bar\">\n\t\t\t<a class=\"bar-item\" href=\"\"><i class=\"iconfont\">&#xe60e;</i></a>\n\t\t\t<a class=\"bar-item\" href=\"\"><i class=\"iconfont\">&#xe607;</i></a>\n\t\t</div>\n\n\t\t<pre class=\"edit-area\" contenteditable=\"true\" @keyup=\"publishMsg($event)\" @keydown=\"keydownEvent($event)\" ></pre>\n\n\t\t<div class=\"action\">\n\t\t\t<span class=\"macos-hint\">按下Cmd+Enter换行</span>\n\t\t\t<a class=\"send-btn\" href=\"javascript:;\">发送</a>\n\t\t</div>\n\t</div>\n";
 
 /***/ },
 /* 69 */
