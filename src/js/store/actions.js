@@ -16,3 +16,11 @@ export const changeView = ({dispatch}, v) => {
 export const toggleChat = ({dispatch}, index) => {
 	dispatch(types.TOGGLECHAT, index)
 }
+
+export const toggleMemberModal = ({dispatch}) => {
+	dispatch(types.TOGGLEMEMBERMODAL)
+}
+
+export const publishMsg = ({dispatch}, msg) => {
+	dispatch(types.PUBLISH_MSG, msg)
+}

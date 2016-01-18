@@ -55,4 +55,25 @@ export const membersState = {
 			{label: '备注', value: '潇湘剑客'}
 		]
 	},
+
+	"006" : {
+		avatar: 'http://imgsrc.baidu.com/forum/w%3D580/sign=c23b544b113853438ccf8729a313b01f/0a3fa18b87d6277f693e951f29381f30e924fcac.jpg',
+		nickname: '王语嫣',
+		gender: 'man',
+		relation: 'friend',
+		meta :[
+			{label: '备注', value: '美女'}
+		]
+	},
+
+	"007" : {
+		avatar: 'http://imgsrc.baidu.com/forum/w%3D580/sign=878c1895b8014a90813e46b599763971/1a34304e251f95ca48533591c8177f3e67095235.jpg',
+		nickname: '扫地僧',
+		gender: 'man',
+		relation: 'friend',
+		
+		meta :[
+			{label: '备注', value: '都是垃圾'}
+		]
+	},
 }
