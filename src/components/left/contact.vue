@@ -3,12 +3,13 @@
 		<div style="display:none" class="sort-title">A</div>
 
 
-		<div v-for="item in members | filterBy 'friend' in 'relation'" class="contact-item">
+		<div v-for="item in members | filterBy 'friend' in 'relation'" class="contact-item" :class="{active: $key == currentIndex}" @click="changeContactIndex($key)">
 			<div class="item-avatar">
 				<img :src="item.avatar" width="30" height="30"/>
 			</div>
 			<div class="item-info">
 				<div class="info-nickname">{{item.nickname}}</div>
+				
 			</div>
 		</div>
 	</div>
@@ -31,6 +32,11 @@
 			padding: 10px 18px 9px;
 			cursor:pointer;
 			border-bottom: 1px solid #292C33;
+
+			&.active{
+				background:#3b4047;
+
+			}
 			.item-avatar{
 				float:left;
 				width: 30px;
@@ -58,6 +64,16 @@
 		computed: {
 			members () {
 				return store.state.members;
+			},
+			currentIndex (){
+				return store.state.contact.currentIndex
+			}
+		},
+		methods: {
+			changeContactIndex: function(index){
+				if(index != this.currentIndex){
+					store.actions.changeContactIndex(index)
+				}
 			}
 		}
 	}
