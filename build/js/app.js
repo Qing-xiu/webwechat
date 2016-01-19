@@ -13444,6 +13444,10 @@
 		chatList.unshift(data);
 	}), (0, _defineProperty3.default)(_chatListMutations, _mutations.TOGGLECHAT, function (state, index) {
 		state.currentChatIndex = index;
+	}), (0, _defineProperty3.default)(_chatListMutations, _mutations.TOP_CHATLIST, function (_ref3, index) {
+		var chatList = _ref3.chatList;
+	
+		chatList.unshift(chatList.splice(index, 1)[0]);
 	}), _chatListMutations);
 
 /***/ },
@@ -13520,11 +13524,13 @@
 	var CHANGEVIEW = exports.CHANGEVIEW = 'CHANGVIEW';
 	var DEL_CHATLIST = exports.DEL_CHATLIST = 'DEL_CAHTLIST';
 	var ADD_CHATLIST = exports.ADD_CHATLIST = 'ADD_CAHTLIST';
+	var TOP_CHATLIST = exports.TOP_CHATLIST = 'TOP_CHATLIST';
 	var TOGGLECHAT = exports.TOGGLECHAT = 'TOGGLECHAT';
 	var TOGGLEMEMBERMODAL = exports.TOGGLEMEMBERMODAL = 'TOGGLEMEMBERMODAL';
 	var PUBLISH_MSG = exports.PUBLISH_MSG = 'PUBLISH_MSG';
-	var CHANGE_CONTACT_INDEX = exports.CHANGE_CONTACT_INDEX = 'CHANGE_CONTACT_INDEX';
+	var CHANGE_CONTACT_KEY = exports.CHANGE_CONTACT_KEY = 'CHANGE_CONTACT_KEY';
 	var ADD_MSGRECORD = exports.ADD_MSGRECORD = 'ADD_MSGRECORD';
+	var TOP_MSGRECORD = exports.TOP_MSGRECORD = 'TOP_MSGRECORD';
 
 /***/ },
 /* 29 */
@@ -13687,6 +13693,10 @@
 		state.msgRecord.unshift({
 			list: data
 		});
+	}), (0, _defineProperty3.default)(_msgrecordMutations, _mutations.TOP_MSGRECORD, function (_ref, index) {
+		var msgRecord = _ref.msgRecord;
+	
+		msgRecord.unshift(msgRecord.splice(index, 1)[0]);
 	}), _msgrecordMutations);
 
 /***/ },
@@ -13698,7 +13708,7 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.addChat = exports.addMsgRecord = exports.changeContactIndex = exports.publishMsg = exports.toggleMemberModal = exports.toggleChat = exports.changeView = exports.addChatList = exports.delChatList = undefined;
+	exports.topChat = exports.addChat = exports.addMsgRecord = exports.changeContactKey = exports.publishMsg = exports.toggleMemberModal = exports.toggleChat = exports.changeView = exports.addChatList = exports.delChatList = undefined;
 	
 	var _mutations = __webpack_require__(28);
 	
@@ -13742,10 +13752,10 @@
 		dispatch(types.PUBLISH_MSG, msg);
 	};
 	
-	var changeContactIndex = exports.changeContactIndex = function changeContactIndex(_ref7, index) {
+	var changeContactKey = exports.changeContactKey = function changeContactKey(_ref7, key) {
 		var dispatch = _ref7.dispatch;
 	
-		dispatch(types.CHANGE_CONTACT_INDEX, index);
+		dispatch(types.CHANGE_CONTACT_KEY, key);
 	};
 	
 	var addMsgRecord = exports.addMsgRecord = function addMsgRecord(_ref8, data) {
@@ -13755,9 +13765,23 @@
 	};
 	
 	var addChat = exports.addChat = function addChat(store, id) {
-		//if(store.state.msgRecord)
-		var data = undefined.contact[id];
+		var chatList = store.state.chatList;
+		var index = -1;
 	
+		for (var i = 0, len = chatList.length; i < len; i++) {
+			if (chatList[i].members.length == 1 && chatList[i].members.indexOf(id) > -1) {
+				index = i;
+				break;
+			}
+		}
+	
+		if (index > -1) {
+			store.actions.changeView('chat');
+			store.actions.topChat(index);
+			return;
+		}
+	
+		var data = store.state.members[id];
 		store.actions.addChatList({
 			avatar: data.avatar,
 			nickname: data.nickname,
@@ -13769,6 +13793,11 @@
 		store.actions.changeView('chat');
 		store.actions.toggleChat(0);
 		store.actions.addMsgRecord([]);
+	};
+	
+	var topChat = exports.topChat = function topChat(store, index) {
+		store.dispatch(types.TOP_CHATLIST, index);
+		store.dispatch(types.TOP_MSGRECORD, index);
 	};
 
 /***/ },
@@ -14363,14 +14392,14 @@
 			members: function members() {
 				return _index2.default.state.members;
 			},
-			currentIndex: function currentIndex() {
-				return _index2.default.state.contact.currentIndex;
+			currentKey: function currentKey() {
+				return _index2.default.state.contact.currentKey;
 			}
 		},
 		methods: {
-			changeContactIndex: function changeContactIndex(index) {
-				if (index != this.currentIndex) {
-					_index2.default.actions.changeContactIndex(index);
+			changeContactKey: function changeContactKey(key) {
+				if (key != this.currentKey) {
+					_index2.default.actions.changeContactKey(key);
 				}
 			}
 		}
@@ -14380,7 +14409,7 @@
 	// 	<div class="contact">
 	// 		<div style="display:none" class="sort-title">A</div>
 
-	// 		<div v-for="item in members | filterBy 'friend' in 'relation'" class="contact-item" :class="{active: $key == currentIndex}" @click="changeContactIndex($key)">
+	// 		<div v-for="item in members | filterBy 'friend' in 'relation'" class="contact-item" :class="{active: $key == currentKey}" @click="changeContactKey($key)">
 	// 			<div class="item-avatar">
 	// 				<img :src="item.avatar" width="30" height="30"/>
 	// 			</div>
@@ -14440,7 +14469,7 @@
 /* 52 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\t<div class=\"contact\">\n\t\t<div style=\"display:none\" class=\"sort-title\">A</div>\n\n\n\t\t<div v-for=\"item in members | filterBy 'friend' in 'relation'\" class=\"contact-item\" :class=\"{active: $key == currentIndex}\" @click=\"changeContactIndex($key)\">\n\t\t\t<div class=\"item-avatar\">\n\t\t\t\t<img :src=\"item.avatar\" width=\"30\" height=\"30\"/>\n\t\t\t</div>\n\t\t\t<div class=\"item-info\">\n\t\t\t\t<div class=\"info-nickname\">{{item.nickname}}</div>\n\t\t\t\t\n\t\t\t</div>\n\t\t</div>\n\t</div>\n";
+	module.exports = "\n\t<div class=\"contact\">\n\t\t<div style=\"display:none\" class=\"sort-title\">A</div>\n\n\n\t\t<div v-for=\"item in members | filterBy 'friend' in 'relation'\" class=\"contact-item\" :class=\"{active: $key == currentKey}\" @click=\"changeContactKey($key)\">\n\t\t\t<div class=\"item-avatar\">\n\t\t\t\t<img :src=\"item.avatar\" width=\"30\" height=\"30\"/>\n\t\t\t</div>\n\t\t\t<div class=\"item-info\">\n\t\t\t\t<div class=\"info-nickname\">{{item.nickname}}</div>\n\t\t\t\t\n\t\t\t</div>\n\t\t</div>\n\t</div>\n";
 
 /***/ },
 /* 53 */
@@ -15059,31 +15088,16 @@
 	
 				return data;
 			},
-			currentIndex: function currentIndex() {
-				return _index2.default.state.contact.currentIndex;
+			currentKey: function currentKey() {
+				return _index2.default.state.contact.currentKey;
 			},
 			info: function info() {
-				return this.contact[this.currentIndex];
+				return this.contact[this.currentKey];
 			}
 		},
 	
 		methods: {
-			addChat: function addChat(id) {
-	
-				var data = this.contact[id];
-	
-				_index2.default.actions.addChatList({
-					avatar: data.avatar,
-					nickname: data.nickname,
-					message: '',
-					members: [id],
-					locked: false
-				});
-	
-				_index2.default.actions.changeView('chat');
-				_index2.default.actions.toggleChat(0);
-				_index2.default.actions.addMsgRecord([]);
-			}
+			addChat: _index2.default.actions.addChat
 		}
 	};
 	// </script>
@@ -15114,7 +15128,7 @@
 	// 		</div>
 
 	// 		<div class="button-area">
-	// 			<a @click="addChat(currentIndex)" class="send-btn" href="javascript:;">发消息</a>
+	// 			<a @click="addChat(currentKey)" class="send-btn" href="javascript:;">发消息</a>
 	// 		</div>
 	// 	</div>
 	// </template>
@@ -15129,7 +15143,7 @@
 /* 73 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\t<div class=\"title-wrap\">\n\t\t<div class=\"wrap-poi\">\n\t\t\t<span class=\"poi-name\">详细信息</span>\n\t\t</div>\n\t</div>\n\n\t<div class=\"conatct-bd\" v-if=\"info\">\n\t\t<div class=\"avatar\">\n\t\t\t<img :src=\"info.avatar\" width=\"100\" height=\"100\" />\n\t\t</div>\n\t\t<div class=\"nickname-area\">\n\t\t\t<div class=\"nickname\">{{info.nickname}}</div>\n\t\t\t<i v-if=\"info.gender == 'man' \" class=\"iconfont men\">&#xe60b;</i>\n\t\t\t<i v-if=\"info.gender == 'woman' \" class=\"iconfont women\">&#xe60d;</i>\n\t\t</div>\n\t\t<div class=\"signature\">{{info.signature}}</div>\n\n\t\t<div v-if=\"info.meta\" class=\"meta-area\">\n\t\t\t<div v-for=\"item in info.meta\" class=\"meta-item\">\n\t\t\t\t<span class=\"item-l\">{{item.label}}：</span>\n\t\t\t\t<div class=\"item-r\">{{item.value}}</div>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"button-area\">\n\t\t\t<a @click=\"addChat(currentIndex)\" class=\"send-btn\" href=\"javascript:;\">发消息</a>\n\t\t</div>\n\t</div>\n";
+	module.exports = "\n\t<div class=\"title-wrap\">\n\t\t<div class=\"wrap-poi\">\n\t\t\t<span class=\"poi-name\">详细信息</span>\n\t\t</div>\n\t</div>\n\n\t<div class=\"conatct-bd\" v-if=\"info\">\n\t\t<div class=\"avatar\">\n\t\t\t<img :src=\"info.avatar\" width=\"100\" height=\"100\" />\n\t\t</div>\n\t\t<div class=\"nickname-area\">\n\t\t\t<div class=\"nickname\">{{info.nickname}}</div>\n\t\t\t<i v-if=\"info.gender == 'man' \" class=\"iconfont men\">&#xe60b;</i>\n\t\t\t<i v-if=\"info.gender == 'woman' \" class=\"iconfont women\">&#xe60d;</i>\n\t\t</div>\n\t\t<div class=\"signature\">{{info.signature}}</div>\n\n\t\t<div v-if=\"info.meta\" class=\"meta-area\">\n\t\t\t<div v-for=\"item in info.meta\" class=\"meta-item\">\n\t\t\t\t<span class=\"item-l\">{{item.label}}：</span>\n\t\t\t\t<div class=\"item-r\">{{item.value}}</div>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"button-area\">\n\t\t\t<a @click=\"addChat(currentKey)\" class=\"send-btn\" href=\"javascript:;\">发消息</a>\n\t\t</div>\n\t</div>\n";
 
 /***/ },
 /* 74 */,
@@ -15228,12 +15242,12 @@
 	var _mutations = __webpack_require__(28);
 	
 	var contactState = exports.contactState = {
-		currentIndex: ''
+		currentKey: ''
 	};
 	
 	var contactMutations = exports.contactMutations = {
-		CHANGE_CONTACT_INDEX: function CHANGE_CONTACT_INDEX(state, index) {
-			state.contact.currentIndex = index;
+		CHANGE_CONTACT_KEY: function CHANGE_CONTACT_KEY(state, key) {
+			state.contact.currentKey = key;
 		}
 	};
 

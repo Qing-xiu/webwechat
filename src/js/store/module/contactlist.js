@@ -1,11 +1,11 @@
-import {CHANGE_CONTACT_INDEX} from '../mutations.js'
+import {CHANGE_CONTACT_KEY} from '../mutations.js'
 
 export const contactState = {
-	currentIndex:''
+	currentKey:''
 }
 
 export const contactMutations = {
-	CHANGE_CONTACT_INDEX (state, index) {
-		state.contact.currentIndex = index
+	CHANGE_CONTACT_KEY (state, key) {
+		state.contact.currentKey = key
 	}
 }

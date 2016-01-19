@@ -3,7 +3,7 @@
 		<div style="display:none" class="sort-title">A</div>
 
 
-		<div v-for="item in members | filterBy 'friend' in 'relation'" class="contact-item" :class="{active: $key == currentIndex}" @click="changeContactIndex($key)">
+		<div v-for="item in members | filterBy 'friend' in 'relation'" class="contact-item" :class="{active: $key == currentKey}" @click="changeContactKey($key)">
 			<div class="item-avatar">
 				<img :src="item.avatar" width="30" height="30"/>
 			</div>
@@ -65,14 +65,14 @@
 			members () {
 				return store.state.members;
 			},
-			currentIndex (){
-				return store.state.contact.currentIndex
+			currentKey (){
+				return store.state.contact.currentKey
 			}
 		},
 		methods: {
-			changeContactIndex: function(index){
-				if(index != this.currentIndex){
-					store.actions.changeContactIndex(index)
+			changeContactKey: function(key){
+				if(key != this.currentKey){
+					store.actions.changeContactKey(key)
 				}
 			}
 		}

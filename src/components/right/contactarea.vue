@@ -24,7 +24,7 @@
 		</div>
 
 		<div class="button-area">
-			<a @click="addChat(currentIndex)" class="send-btn" href="javascript:;">发消息</a>
+			<a @click="addChat(currentKey)" class="send-btn" href="javascript:;">发消息</a>
 		</div>
 	</div>
 </template>
@@ -54,31 +54,16 @@
 
 				return data;
 			},
-			currentIndex () {
-				return store.state.contact.currentIndex
+			currentKey () {
+				return store.state.contact.currentKey
 			},
 			info () {
-				return this.contact[this.currentIndex]
+				return this.contact[this.currentKey]
 			}
 		},
 
 		methods: {
-			addChat (id) {
-				
-				var data = this.contact[id];
-
-				store.actions.addChatList({
-					avatar: data.avatar,
-					nickname: data.nickname,
-					message: '',
-					members: [id],
-					locked: false
-				});
-
-				store.actions.changeView('chat');
-				store.actions.toggleChat(0);
-				store.actions.addMsgRecord([])
-			}
+			addChat: store.actions.addChat
 		}
 	}
 </script>
