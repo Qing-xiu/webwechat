@@ -121,16 +121,15 @@
 					if(msg == '') return;
 					e.target.innerHTML = '';
 					store.actions.publishMsg(msg);
+
+					this.$nextTick(function(){
+						var wrapper = document.querySelector('#chatWrapper');
+						wrapper.scrollTop = wrapper.scrollHeight;
+					});
+					
 				}
 			},
 			publishMsg (e) {
-			}
-		},
-
-		watch: {
-			msgRecord () {
-				var wrapper = document.querySelector('#chatWrapper');
-				wrapper.scrollTop = wrapper.scrollHeight;
 			}
 		},
 
