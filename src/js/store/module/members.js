@@ -9,6 +9,7 @@ export const membersState = {
 		nickname: '无名',
 		gender: 'man',
 		relation: 'friend',
+		signature: '万剑归一',
 		meta :[
 			{label: '备注', value: '江湖奇才'},
 			{label: '地址', value: '中原 无名山'}
@@ -20,6 +21,7 @@ export const membersState = {
 		nickname: '黄蓉',
 		gender: 'woman',
 		relation: 'friend',
+		signature: '靖哥哥',
 		meta :[
 			{label: '备注', value: '丐帮帮主'},
 		]
@@ -30,6 +32,7 @@ export const membersState = {
 		nickname: '杨过',
 		gender: 'man',
 		relation: 'friend',
+		signature: '姑姑，是你吗',
 		meta :[
 			{label: '备注', value: '恋师狂魔'},
 			{label: '地址', value: '活死人墓'},
@@ -41,6 +44,7 @@ export const membersState = {
 		nickname: '东方不败',
 		gender: '',
 		relation: '',
+		signature: '',
 		meta :[
 			{label: '备注', value: '东方'}
 		]
@@ -51,6 +55,7 @@ export const membersState = {
 		nickname: '莫大',
 		gender: 'man',
 		relation: 'friend',
+		signature: '一曲肝肠断，天涯何处觅知音',
 		meta :[
 			{label: '备注', value: '潇湘剑客'}
 		]
@@ -59,8 +64,9 @@ export const membersState = {
 	"006" : {
 		avatar: 'http://imgsrc.baidu.com/forum/w%3D580/sign=c23b544b113853438ccf8729a313b01f/0a3fa18b87d6277f693e951f29381f30e924fcac.jpg',
 		nickname: '王语嫣',
-		gender: 'man',
+		gender: 'woman',
 		relation: 'friend',
+		signature: '段公子，你是个好人',
 		meta :[
 			{label: '备注', value: '美女'}
 		]
@@ -71,7 +77,7 @@ export const membersState = {
 		nickname: '扫地僧',
 		gender: 'man',
 		relation: 'friend',
-		
+		signature: '我不是说你是垃圾，我是说在座的各位都是垃圾',
 		meta :[
 			{label: '备注', value: '都是垃圾'}
 		]

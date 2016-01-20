@@ -1,4 +1,4 @@
-import {ADD_CHATLIST,DEL_CHATLIST, TOGGLECHAT} from '../mutations.js';
+import {ADD_CHATLIST,DEL_CHATLIST, TOGGLECHAT, TOP_CHATLIST} from '../mutations.js';
 
 export const chatListInitialState = [
 	{
@@ -32,5 +32,9 @@ export const chatListMutations = {
 
 	[TOGGLECHAT] (state, index){
 		state.currentChatIndex = index
+	},
+
+	[TOP_CHATLIST] ({chatList}, index) {
+		chatList.unshift(chatList.splice(index, 1)[0])
 	}
 }

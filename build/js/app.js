@@ -12510,7 +12510,7 @@
 	
 	var _left2 = _interopRequireDefault(_left);
 	
-	var _right = __webpack_require__(66);
+	var _right = __webpack_require__(67);
 	
 	var _right2 = _interopRequireDefault(_right);
 	
@@ -12579,7 +12579,7 @@
 	module.exports = __webpack_require__(24)
 	
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(65)
+	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(66)
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
@@ -12646,11 +12646,11 @@
 	
 	var _user2 = _interopRequireDefault(_user);
 	
-	var _search = __webpack_require__(45);
+	var _search = __webpack_require__(46);
 	
 	var _search2 = _interopRequireDefault(_search);
 	
-	var _tab = __webpack_require__(50);
+	var _tab = __webpack_require__(51);
 	
 	var _tab2 = _interopRequireDefault(_tab);
 	
@@ -12693,7 +12693,7 @@
 	module.exports = __webpack_require__(28)
 	
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(44)
+	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(45)
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
@@ -12852,7 +12852,9 @@
 	
 	var _msgrecord = __webpack_require__(42);
 	
-	var _actions = __webpack_require__(43);
+	var _contactlist = __webpack_require__(43);
+	
+	var _actions = __webpack_require__(44);
 	
 	var actions = _interopRequireWildcard(_actions);
 	
@@ -12874,10 +12876,11 @@
 			currentChatIndex: _initial.initialState.currentChatIndex,
 			memberModal: _initial.initialState.memberModal,
 			chatList: _chatlist.chatListInitialState,
-			msgRecord: _msgrecord.msgrecordState
+			msgRecord: _msgrecord.msgrecordState,
+			contact: _contactlist.contactState
 		},
 	
-		mutations: [_chatlist.chatListMutations, _initial.initialMutations, _msgrecord.msgrecordMutations],
+		mutations: [_chatlist.chatListMutations, _initial.initialMutations, _msgrecord.msgrecordMutations, _contactlist.contactMutations],
 	
 		actions: actions
 	});
@@ -13415,6 +13418,10 @@
 		chatList.unshift(data);
 	}), (0, _defineProperty3.default)(_chatListMutations, _mutations.TOGGLECHAT, function (state, index) {
 		state.currentChatIndex = index;
+	}), (0, _defineProperty3.default)(_chatListMutations, _mutations.TOP_CHATLIST, function (_ref3, index) {
+		var chatList = _ref3.chatList;
+	
+		chatList.unshift(chatList.splice(index, 1)[0]);
 	}), _chatListMutations);
 
 /***/ },
@@ -13491,9 +13498,13 @@
 	var CHANGEVIEW = exports.CHANGEVIEW = 'CHANGVIEW';
 	var DEL_CHATLIST = exports.DEL_CHATLIST = 'DEL_CAHTLIST';
 	var ADD_CHATLIST = exports.ADD_CHATLIST = 'ADD_CAHTLIST';
+	var TOP_CHATLIST = exports.TOP_CHATLIST = 'TOP_CHATLIST';
 	var TOGGLECHAT = exports.TOGGLECHAT = 'TOGGLECHAT';
 	var TOGGLEMEMBERMODAL = exports.TOGGLEMEMBERMODAL = 'TOGGLEMEMBERMODAL';
 	var PUBLISH_MSG = exports.PUBLISH_MSG = 'PUBLISH_MSG';
+	var CHANGE_CONTACT_KEY = exports.CHANGE_CONTACT_KEY = 'CHANGE_CONTACT_KEY';
+	var ADD_MSGRECORD = exports.ADD_MSGRECORD = 'ADD_MSGRECORD';
+	var TOP_MSGRECORD = exports.TOP_MSGRECORD = 'TOP_MSGRECORD';
 
 /***/ },
 /* 40 */
@@ -13545,6 +13556,7 @@
 			nickname: '无名',
 			gender: 'man',
 			relation: 'friend',
+			signature: '万剑归一',
 			meta: [{ label: '备注', value: '江湖奇才' }, { label: '地址', value: '中原 无名山' }]
 		},
 	
@@ -13553,6 +13565,7 @@
 			nickname: '黄蓉',
 			gender: 'woman',
 			relation: 'friend',
+			signature: '靖哥哥',
 			meta: [{ label: '备注', value: '丐帮帮主' }]
 		},
 	
@@ -13561,6 +13574,7 @@
 			nickname: '杨过',
 			gender: 'man',
 			relation: 'friend',
+			signature: '姑姑，是你吗',
 			meta: [{ label: '备注', value: '恋师狂魔' }, { label: '地址', value: '活死人墓' }]
 		},
 	
@@ -13569,6 +13583,7 @@
 			nickname: '东方不败',
 			gender: '',
 			relation: '',
+			signature: '',
 			meta: [{ label: '备注', value: '东方' }]
 		},
 	
@@ -13577,14 +13592,16 @@
 			nickname: '莫大',
 			gender: 'man',
 			relation: 'friend',
+			signature: '一曲肝肠断，天涯何处觅知音',
 			meta: [{ label: '备注', value: '潇湘剑客' }]
 		},
 	
 		"006": {
 			avatar: 'http://imgsrc.baidu.com/forum/w%3D580/sign=c23b544b113853438ccf8729a313b01f/0a3fa18b87d6277f693e951f29381f30e924fcac.jpg',
 			nickname: '王语嫣',
-			gender: 'man',
+			gender: 'woman',
 			relation: 'friend',
+			signature: '段公子，你是个好人',
 			meta: [{ label: '备注', value: '美女' }]
 		},
 	
@@ -13593,7 +13610,7 @@
 			nickname: '扫地僧',
 			gender: 'man',
 			relation: 'friend',
-	
+			signature: '我不是说你是垃圾，我是说在座的各位都是垃圾',
 			meta: [{ label: '备注', value: '都是垃圾' }]
 		}
 	};
@@ -13603,6 +13620,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+	
+	var _msgrecordMutations;
 	
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -13638,13 +13657,21 @@
 		list: []
 	}];
 	
-	var msgrecordMutations = exports.msgrecordMutations = (0, _defineProperty3.default)({}, _mutations.PUBLISH_MSG, function (state, msg) {
+	var msgrecordMutations = exports.msgrecordMutations = (_msgrecordMutations = {}, (0, _defineProperty3.default)(_msgrecordMutations, _mutations.PUBLISH_MSG, function (state, msg) {
 		state.msgRecord[state.currentChatIndex].list.push({
 			msg: msg,
 			time: Date.now(),
 			userId: state.userId
 		});
-	});
+	}), (0, _defineProperty3.default)(_msgrecordMutations, _mutations.ADD_MSGRECORD, function (state, data) {
+		state.msgRecord.unshift({
+			list: data
+		});
+	}), (0, _defineProperty3.default)(_msgrecordMutations, _mutations.TOP_MSGRECORD, function (_ref, index) {
+		var msgRecord = _ref.msgRecord;
+	
+		msgRecord.unshift(msgRecord.splice(index, 1)[0]);
+	}), _msgrecordMutations);
 
 /***/ },
 /* 43 */
@@ -13655,7 +13682,30 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.publishMsg = exports.toggleMemberModal = exports.toggleChat = exports.changeView = exports.addChatList = exports.delChatList = undefined;
+	exports.contactMutations = exports.contactState = undefined;
+	
+	var _mutations = __webpack_require__(39);
+	
+	var contactState = exports.contactState = {
+		currentKey: ''
+	};
+	
+	var contactMutations = exports.contactMutations = {
+		CHANGE_CONTACT_KEY: function CHANGE_CONTACT_KEY(state, key) {
+			state.contact.currentKey = key;
+		}
+	};
+
+/***/ },
+/* 44 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.topChat = exports.addChat = exports.addMsgRecord = exports.changeContactKey = exports.publishMsg = exports.toggleMemberModal = exports.toggleChat = exports.changeView = exports.addChatList = exports.delChatList = undefined;
 	
 	var _mutations = __webpack_require__(39);
 	
@@ -13669,10 +13719,10 @@
 		dispatch(types.DEL_CHATLIST, index);
 	};
 	
-	var addChatList = exports.addChatList = function addChatList(_ref2, index) {
+	var addChatList = exports.addChatList = function addChatList(_ref2, data) {
 		var dispatch = _ref2.dispatch;
 	
-		dispatch(types.ADD_CHATLIST, index);
+		dispatch(types.ADD_CHATLIST, data);
 	};
 	
 	var changeView = exports.changeView = function changeView(_ref3, v) {
@@ -13698,22 +13748,70 @@
 	
 		dispatch(types.PUBLISH_MSG, msg);
 	};
+	
+	var changeContactKey = exports.changeContactKey = function changeContactKey(_ref7, key) {
+		var dispatch = _ref7.dispatch;
+	
+		dispatch(types.CHANGE_CONTACT_KEY, key);
+	};
+	
+	var addMsgRecord = exports.addMsgRecord = function addMsgRecord(_ref8, data) {
+		var dispatch = _ref8.dispatch;
+	
+		dispatch(types.ADD_MSGRECORD, data);
+	};
+	
+	var addChat = exports.addChat = function addChat(store, id) {
+		var chatList = store.state.chatList;
+		var index = -1;
+	
+		for (var i = 0, len = chatList.length; i < len; i++) {
+			if (chatList[i].members.length == 1 && chatList[i].members.indexOf(id) > -1) {
+				index = i;
+				break;
+			}
+		}
+	
+		if (index > -1) {
+			store.actions.changeView('chat');
+			store.actions.topChat(index);
+			return;
+		}
+	
+		var data = store.state.members[id];
+		store.actions.addChatList({
+			avatar: data.avatar,
+			nickname: data.nickname,
+			message: '',
+			members: [id],
+			locked: false
+		});
+	
+		store.actions.changeView('chat');
+		store.actions.toggleChat(0);
+		store.actions.addMsgRecord([]);
+	};
+	
+	var topChat = exports.topChat = function topChat(store, index) {
+		store.dispatch(types.TOP_CHATLIST, index);
+		store.dispatch(types.TOP_MSGRECORD, index);
+	};
 
 /***/ },
-/* 44 */
+/* 45 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"user\">\n\t\t<div class=\"avatar\">\n\t\t\t<img :src=\"user.avatar\" width=\"40\" height=\"40\" />\n\t\t</div>\n\t\t<div class=\"info\">\n\t\t\t<span class=\"nickname\">{{user.nickname}}</span>\n\t\t\t<a class=\"opt\" href=\"#\"><i class=\"iconfont\">&#xe601;</i></a>\n\t\t</div>\n\t</div>";
 
 /***/ },
-/* 45 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(46)
-	module.exports = __webpack_require__(48)
+	__webpack_require__(47)
+	module.exports = __webpack_require__(49)
 	
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(49)
+	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(50)
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
@@ -13727,13 +13825,13 @@
 	})()}
 
 /***/ },
-/* 46 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(47);
+	var content = __webpack_require__(48);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(19)(content, {});
@@ -13753,7 +13851,7 @@
 	}
 
 /***/ },
-/* 47 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(18)();
@@ -13767,7 +13865,7 @@
 
 
 /***/ },
-/* 48 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13831,20 +13929,20 @@
 	// <script lang="babel">
 
 /***/ },
-/* 49 */
+/* 50 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"search\">\n\t\t<div class=\"search-icon\"><i class=\"iconfont\">&#xe600;</i></div>\n\t\t<input class=\"search-input\" type=\"text\" placeholder=\"搜索\" />\n\t</div>";
 
 /***/ },
-/* 50 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(51)
-	module.exports = __webpack_require__(53)
+	__webpack_require__(52)
+	module.exports = __webpack_require__(54)
 	
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(64)
+	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(65)
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
@@ -13858,13 +13956,13 @@
 	})()}
 
 /***/ },
-/* 51 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(52);
+	var content = __webpack_require__(53);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(19)(content, {});
@@ -13884,7 +13982,7 @@
 	}
 
 /***/ },
-/* 52 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(18)();
@@ -13898,7 +13996,7 @@
 
 
 /***/ },
-/* 53 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13911,11 +14009,11 @@
 	
 	var _index2 = _interopRequireDefault(_index);
 	
-	var _chat = __webpack_require__(54);
+	var _chat = __webpack_require__(55);
 	
 	var _chat2 = _interopRequireDefault(_chat);
 	
-	var _contact = __webpack_require__(59);
+	var _contact = __webpack_require__(60);
 	
 	var _contact2 = _interopRequireDefault(_contact);
 	
@@ -14015,14 +14113,14 @@
 	// <script lang="babel">
 
 /***/ },
-/* 54 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(55)
-	module.exports = __webpack_require__(57)
+	__webpack_require__(56)
+	module.exports = __webpack_require__(58)
 	
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(58)
+	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(59)
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
@@ -14036,13 +14134,13 @@
 	})()}
 
 /***/ },
-/* 55 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(56);
+	var content = __webpack_require__(57);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(19)(content, {});
@@ -14062,7 +14160,7 @@
 	}
 
 /***/ },
-/* 56 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(18)();
@@ -14076,7 +14174,7 @@
 
 
 /***/ },
-/* 57 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -14195,20 +14293,20 @@
 	// <script lang="babel">
 
 /***/ },
-/* 58 */
+/* 59 */
 /***/ function(module, exports) {
 
 	module.exports = "<template v-for=\"item in chatList\" >\n\t\t<div class=\"chat-item\" :class=\"{active: currentChatIndex == $index}\" @click=\"toggleChat($index)\" :index=$index>\n\t\t\t<div class=\"item-avatar\">\n\t\t\t\t<img :src=\"item.avatar\" />\n\t\t\t</div>\n\t\t\t<div class=\"item-ext\">\n\t\t\t\t<div class=\"ext-time\">{{item.time}}</div>\n\t\t\t\t<div class=\"ext-attr\">\n\t\t\t\t\t<i v-if=\"item.locked\" class=\"iconfont\">&#xe604;</i>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"item-info\">\n\t\t\t\t<div class=\"info-nickname\">{{item.nickname}}</div>\n\t\t\t\t<div class=\"info-msg\">{{item.message}}</div>\n\t\t\t</div>\n\t\t</div>\n\t</template>";
 
 /***/ },
-/* 59 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(60)
-	module.exports = __webpack_require__(62)
+	__webpack_require__(61)
+	module.exports = __webpack_require__(63)
 	
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(63)
+	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(64)
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
@@ -14222,13 +14320,13 @@
 	})()}
 
 /***/ },
-/* 60 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(61);
+	var content = __webpack_require__(62);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(19)(content, {});
@@ -14248,7 +14346,7 @@
 	}
 
 /***/ },
-/* 61 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(18)();
@@ -14256,13 +14354,13 @@
 	
 	
 	// module
-	exports.push([module.id, ".contact .sort-title {\n  font-weight: 400;\n  color: #787b87;\n  font-size: 14px;\n  background: #292d32;\n  padding: 2px 18px; }\n\n.contact .contact-item {\n  *zoom: 1;\n  display: block;\n  padding: 10px 18px 9px;\n  cursor: pointer;\n  border-bottom: 1px solid #292C33; }\n  .contact .contact-item:after {\n    content: \"\";\n    display: block;\n    height: 0;\n    width: 0;\n    clear: both;\n    visibility: hidden;\n    overflow: hidden; }\n  .contact .contact-item .item-avatar {\n    float: left;\n    width: 30px;\n    margin-right: 10px; }\n  .contact .contact-item .item-info {\n    overflow: hidden;\n    line-height: 30px; }\n  .contact .contact-item .info-nickname {\n    color: #fff;\n    font-size: 13px;\n    font-weight: 400;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    width: 100%; }\n", ""]);
+	exports.push([module.id, ".contact .sort-title {\n  font-weight: 400;\n  color: #787b87;\n  font-size: 14px;\n  background: #292d32;\n  padding: 2px 18px; }\n\n.contact .contact-item {\n  *zoom: 1;\n  display: block;\n  padding: 10px 18px 9px;\n  cursor: pointer;\n  border-bottom: 1px solid #292C33; }\n  .contact .contact-item:after {\n    content: \"\";\n    display: block;\n    height: 0;\n    width: 0;\n    clear: both;\n    visibility: hidden;\n    overflow: hidden; }\n  .contact .contact-item.active {\n    background: #3b4047; }\n  .contact .contact-item .item-avatar {\n    float: left;\n    width: 30px;\n    margin-right: 10px; }\n  .contact .contact-item .item-info {\n    overflow: hidden;\n    line-height: 30px; }\n  .contact .contact-item .info-nickname {\n    color: #fff;\n    font-size: 13px;\n    font-weight: 400;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    width: 100%; }\n", ""]);
 	
 	// exports
 
 
 /***/ },
-/* 62 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14282,6 +14380,16 @@
 		computed: {
 			members: function members() {
 				return _index2.default.state.members;
+			},
+			currentKey: function currentKey() {
+				return _index2.default.state.contact.currentKey;
+			}
+		},
+		methods: {
+			changeContactKey: function changeContactKey(key) {
+				if (key != this.currentKey) {
+					_index2.default.actions.changeContactKey(key);
+				}
 			}
 		}
 	};
@@ -14290,12 +14398,13 @@
 	// 	<div class="contact">
 	// 		<div style="display:none" class="sort-title">A</div>
 
-	// 		<div v-for="item in members | filterBy 'friend' in 'relation'" class="contact-item">
+	// 		<div v-for="item in members | filterBy 'friend' in 'relation'" class="contact-item" :class="{active: $key == currentKey}" @click="changeContactKey($key)">
 	// 			<div class="item-avatar">
 	// 				<img :src="item.avatar" width="30" height="30"/>
 	// 			</div>
 	// 			<div class="item-info">
 	// 				<div class="info-nickname">{{item.nickname}}</div>
+
 	// 			</div>
 	// 		</div>
 	// 	</div>
@@ -14318,6 +14427,11 @@
 	// 			padding: 10px 18px 9px;
 	// 			cursor:pointer;
 	// 			border-bottom: 1px solid #292C33;
+
+	// 			&.active{
+	// 				background:#3b4047;
+
+	// 			}
 	// 			.item-avatar{
 	// 				float:left;
 	// 				width: 30px;
@@ -14341,29 +14455,29 @@
 	// <script lang="babel">
 
 /***/ },
-/* 63 */
-/***/ function(module, exports) {
-
-	module.exports = "<div class=\"contact\">\n\t\t<div style=\"display:none\" class=\"sort-title\">A</div>\n\n\n\t\t<div v-for=\"item in members | filterBy 'friend' in 'relation'\" class=\"contact-item\">\n\t\t\t<div class=\"item-avatar\">\n\t\t\t\t<img :src=\"item.avatar\" width=\"30\" height=\"30\"/>\n\t\t\t</div>\n\t\t\t<div class=\"item-info\">\n\t\t\t\t<div class=\"info-nickname\">{{item.nickname}}</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>";
-
-/***/ },
 /* 64 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"tab\">\n\t\t<div class=\"tab-item\">\n\t\t\t<a class=\"item-btn\" @click=\"changeView('chat')\" href=\"javascript:;\">\n\t\t\t\t<i v-show=\"currentView == 'chat'\" class=\"iconfont hover\">&#xe606;</i>\n\t\t\t\t<i v-else class=\"iconfont\">&#xe602;</i>\n\t\t\t</a>\n\t\t</div>\n\t\t<div class=\"tab-item\">\n\t\t\t<a class=\"item-btn\" @click=\"changeView('contact')\" href=\"javascript:;\">\n\t\t\t\t<i v-show=\"currentView == 'contact'\" class=\"iconfont hover\">&#xe605;</i>\n\t\t\t\t<i v-else class=\"iconfont\">&#xe603;</i>\n\t\t\t</a>\n\t\t</div>\n\t</div>\n\n\t<div class=\"nav-view\" v-show=\"currentView == 'chat'\" >\n\t\t<chat></chat>\n\t</div>\n\n\t<div class=\"nav-view\" v-show=\"currentView == 'contact'\" >\n\t\t<contact></contact>\n\t</div>";
+	module.exports = "<div class=\"contact\">\n\t\t<div style=\"display:none\" class=\"sort-title\">A</div>\n\n\n\t\t<div v-for=\"item in members | filterBy 'friend' in 'relation'\" class=\"contact-item\" :class=\"{active: $key == currentKey}\" @click=\"changeContactKey($key)\">\n\t\t\t<div class=\"item-avatar\">\n\t\t\t\t<img :src=\"item.avatar\" width=\"30\" height=\"30\"/>\n\t\t\t</div>\n\t\t\t<div class=\"item-info\">\n\t\t\t\t<div class=\"info-nickname\">{{item.nickname}}</div>\n\t\t\t\t\n\t\t\t</div>\n\t\t</div>\n\t</div>";
 
 /***/ },
 /* 65 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"panel\">\n\t\t<user></user>\n\t\t<search></search>\n\t\t<tab></tab>\n\t</div>";
+	module.exports = "<div class=\"tab\">\n\t\t<div class=\"tab-item\">\n\t\t\t<a class=\"item-btn\" @click=\"changeView('chat')\" href=\"javascript:;\">\n\t\t\t\t<i v-show=\"currentView == 'chat'\" class=\"iconfont hover\">&#xe606;</i>\n\t\t\t\t<i v-else class=\"iconfont\">&#xe602;</i>\n\t\t\t</a>\n\t\t</div>\n\t\t<div class=\"tab-item\">\n\t\t\t<a class=\"item-btn\" @click=\"changeView('contact')\" href=\"javascript:;\">\n\t\t\t\t<i v-show=\"currentView == 'contact'\" class=\"iconfont hover\">&#xe605;</i>\n\t\t\t\t<i v-else class=\"iconfont\">&#xe603;</i>\n\t\t\t</a>\n\t\t</div>\n\t</div>\n\n\t<div class=\"nav-view\" v-show=\"currentView == 'chat'\" >\n\t\t<chat></chat>\n\t</div>\n\n\t<div class=\"nav-view\" v-show=\"currentView == 'contact'\" >\n\t\t<contact></contact>\n\t</div>";
 
 /***/ },
 /* 66 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"panel\">\n\t\t<user></user>\n\t\t<search></search>\n\t\t<tab></tab>\n\t</div>";
+
+/***/ },
+/* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(67)
-	module.exports = __webpack_require__(69)
+	__webpack_require__(68)
+	module.exports = __webpack_require__(70)
 	
 	if (module.exports.__esModule) module.exports = module.exports.default
 	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(86)
@@ -14380,13 +14494,13 @@
 	})()}
 
 /***/ },
-/* 67 */
+/* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(68);
+	var content = __webpack_require__(69);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(19)(content, {});
@@ -14406,7 +14520,7 @@
 	}
 
 /***/ },
-/* 68 */
+/* 69 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(18)();
@@ -14420,7 +14534,7 @@
 
 
 /***/ },
-/* 69 */
+/* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14433,11 +14547,11 @@
 	
 	var _index2 = _interopRequireDefault(_index);
 	
-	var _chatarea = __webpack_require__(70);
+	var _chatarea = __webpack_require__(71);
 	
 	var _chatarea2 = _interopRequireDefault(_chatarea);
 	
-	var _contactArea = __webpack_require__(80);
+	var _contactArea = __webpack_require__(81);
 	
 	var _contactArea2 = _interopRequireDefault(_contactArea);
 	
@@ -14477,14 +14591,14 @@
 	// <script>
 
 /***/ },
-/* 70 */
+/* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(71)
-	module.exports = __webpack_require__(73)
+	__webpack_require__(72)
+	module.exports = __webpack_require__(74)
 	
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(79)
+	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(80)
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
@@ -14498,13 +14612,13 @@
 	})()}
 
 /***/ },
-/* 71 */
+/* 72 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(72);
+	var content = __webpack_require__(73);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(19)(content, {});
@@ -14524,7 +14638,7 @@
 	}
 
 /***/ },
-/* 72 */
+/* 73 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(18)();
@@ -14538,7 +14652,7 @@
 
 
 /***/ },
-/* 73 */
+/* 74 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14551,7 +14665,7 @@
 	
 	var _index2 = _interopRequireDefault(_index);
 	
-	var _wgt_members = __webpack_require__(74);
+	var _wgt_members = __webpack_require__(75);
 	
 	var _wgt_members2 = _interopRequireDefault(_wgt_members);
 	
@@ -14695,14 +14809,14 @@
 	// </script>
 
 /***/ },
-/* 74 */
+/* 75 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(75)
-	module.exports = __webpack_require__(77)
+	__webpack_require__(76)
+	module.exports = __webpack_require__(78)
 	
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(78)
+	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(79)
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
@@ -14716,13 +14830,13 @@
 	})()}
 
 /***/ },
-/* 75 */
+/* 76 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(76);
+	var content = __webpack_require__(77);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(19)(content, {});
@@ -14742,7 +14856,7 @@
 	}
 
 /***/ },
-/* 76 */
+/* 77 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(18)();
@@ -14756,7 +14870,7 @@
 
 
 /***/ },
-/* 77 */
+/* 78 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -14844,26 +14958,26 @@
 	// </script>
 
 /***/ },
-/* 78 */
+/* 79 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"wgt-members\">\n\t\t<div class=\"member\">\n\t\t\t<div class=\"opt\"><i class=\"iconfont\">&#xe60a;</i></div>\n\t\t</div>\n\n\t\t<div v-for=\"item in myMessage\" class=\"member\">\n\t\t\t\n\t\t\t<img class=\"member-avatar\" :src=\"item.avatar\"  width=\"55\" height=\"55\" />\t\n\t\t\t\n\t\t\t<div class=\"member-nickname\">{{item.nickname}}</div>\n\t\t</div>\n\t</div>";
 
 /***/ },
-/* 79 */
+/* 80 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"title-wrap\">\n\t\t<div class=\"wrap-poi\" @click.stop=\"toggleMemberModal\">\n\t\t\t<template v-if=\"currentChatIndex >= 0\">\n\t\t\t\t<span class=\"poi-name\">{{chatInfo.nickname}}</span>\n\t\t\t\t<span v-if=\"chatInfo.members.length > 1\" class=\"poi-count\">({{chatInfo.members.length}})</span>\n\t\t\t\t<i v-if=\"currentChatIndex > -1\" class=\"iconfont poi-icon\">&#xe608;</i>\n\t\t\t</template>\n\t\t</div>\n\t</div>\n\n\t<wgtmembers v-show=\"memberModal\" @click.stop :my-message=\"members\" transition=\"expend\"></wgtmembers>\n\n\t<div id=\"chatWrapper\" class=\"chat-wrapper\">\n\t\t<div class=\"wrapper-bd\">\n\n\t\t\t<div v-if=\"currentChatIndex == -1\" class=\"no-bubble\">未选择聊天</div>\n\t\t\t<template v-else>\n\t\t\t\t<div v-if=\"msgRecord.length < 1\" class=\"no-bubble\">暂时没有新消息</div>\n\t\t\t\t<div v-else class=\"clearfix\" v-for=\"msg in msgRecord\" >\n\t\t\t\t\t<div class=\"bubble\" :class=\"{me: msg.userId == userId}\">\n\t\t\t\t\t\t<div class=\"bubble-system\">\n\t\t\t\t\t\t\t<span class=\"system-content\">{{msg.time | dateBy}}</span>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<img class=\"bubble-avatar\" :src=\"allMembers[msg.userId].avatar\" width=\"40\" height=\"40\" />\n\t\t\t\t\t\t<div class=\"bubble-content\">\n\t\t\t\t\t\t\t<div v-if=\"msg.userId != userId\" class=\"content-nickname\">{{allMembers[msg.userId].nickname}}</div>\n\t\t\t\t\t\t\t<div class=\"content-msg\">\n\t\t\t\t\t\t\t\t<pre>{{{msg.msg}}}</pre>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</template>\n\t\t\t\n\t\t</div>\n\t</div>\n\n\t<div class=\"chat-ft\">\n\t\t<div class=\"tool-bar\">\n\t\t\t<a class=\"bar-item\" href=\"\"><i class=\"iconfont\">&#xe60e;</i></a>\n\t\t\t<a class=\"bar-item\" href=\"\"><i class=\"iconfont\">&#xe607;</i></a>\n\t\t</div>\n\n\t\t<pre class=\"edit-area\" contenteditable=\"true\" @keyup=\"publishMsg($event)\" @keydown=\"keydownEvent($event)\" ></pre>\n\n\t\t<div class=\"action\">\n\t\t\t<span class=\"macos-hint\">按下Cmd+Enter换行</span>\n\t\t\t<a class=\"send-btn\" href=\"javascript:;\">发送</a>\n\t\t</div>\n\t</div>";
 
 /***/ },
-/* 80 */
+/* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(81)
-	module.exports = __webpack_require__(83)
+	__webpack_require__(82)
+	module.exports = __webpack_require__(84)
 	
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(84)
+	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(85)
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
@@ -14877,13 +14991,13 @@
 	})()}
 
 /***/ },
-/* 81 */
+/* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(82);
+	var content = __webpack_require__(83);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(19)(content, {});
@@ -14903,7 +15017,7 @@
 	}
 
 /***/ },
-/* 82 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(18)();
@@ -14917,69 +15031,94 @@
 
 
 /***/ },
-/* 83 */
-/***/ function(module, exports) {
+/* 84 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
+	
+	var _index = __webpack_require__(29);
+	
+	var _index2 = _interopRequireDefault(_index);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+		name: 'contactarea',
+		computed: {
+			contact: function contact() {
+				var members = _index2.default.state.members,
+				    data = [];
+	
+				for (var i in members) {
+					if (members[i].relation == 'friend') {
+						data[i] = members[i];
+						//data.push(members[i])
+					}
+				}
+	
+				console.log(data);
+	
+				return data;
+			},
+			currentKey: function currentKey() {
+				return _index2.default.state.contact.currentKey;
+			},
+			info: function info() {
+				return this.contact[this.currentKey];
+			}
+		},
+	
+		methods: {
+			addChat: _index2.default.actions.addChat
+		}
+	};
+	// </script>
 	// <template>
 	// 	<div class="title-wrap">
 	// 		<div class="wrap-poi">
 	// 			<span class="poi-name">详细信息</span>
 	// 		</div>
 	// 	</div>
-	
-	// 	<div class="conatct-bd">
+
+	// 	<div class="conatct-bd" v-if="info">
 	// 		<div class="avatar">
-	// 			<img src="../../img/webwxgeticon.jpeg" width="100" height="100" />
+	// 			<img :src="info.avatar" width="100" height="100" />
 	// 		</div>
 	// 		<div class="nickname-area">
-	// 			<div class="nickname">江东帆影</div>
-	// 			<i class="iconfont men">&#xe60b;</i>
-	// 			<i class="iconfont women">&#xe60d;</i>
+	// 			<div class="nickname">{{info.nickname}}</div>
+	// 			<i v-if="info.gender == 'man' " class="iconfont men">&#xe60b;</i>
+	// 			<i v-if="info.gender == 'woman' " class="iconfont women">&#xe60d;</i>
 	// 		</div>
-	// 		<div class="signature">江畔何人初见月，江月何年初照人</div>
-	// 		<div class="meta-area">
-	// 			<div class="meta-item">
-	// 				<span class="item-l">备注：</span>
-	// 				<div class="item-r">陆孤瞻</div>
-	// 			</div>
-	// 			<div class="meta-item">
-	// 				<span class="item-l">地区：</span>
-	// 				<div class="item-r">广东 罗浮山</div>
+	// 		<div class="signature">{{info.signature}}</div>
+
+	// 		<div v-if="info.meta" class="meta-area">
+	// 			<div v-for="item in info.meta" class="meta-item">
+	// 				<span class="item-l">{{item.label}}：</span>
+	// 				<div class="item-r">{{item.value}}</div>
 	// 			</div>
 	// 		</div>
-	
+
 	// 		<div class="button-area">
-	// 			<a class="send-btn" href="javascript:;">发消息</a>
+	// 			<a @click="addChat(currentKey)" class="send-btn" href="javascript:;">发消息</a>
 	// 		</div>
 	// 	</div>
 	// </template>
-	
+
 	// <style lang="sass">
 	// 	@import "../../sass/right_contactarea";
 	// </style>
-	
+
 	// <script>
-	exports.default = {
-		name: 'contactarea'
-	};
-	// </script>
-
-/***/ },
-/* 84 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = "<div class=\"title-wrap\">\n\t\t<div class=\"wrap-poi\">\n\t\t\t<span class=\"poi-name\">详细信息</span>\n\t\t</div>\n\t</div>\n\n\t<div class=\"conatct-bd\">\n\t\t<div class=\"avatar\">\n\t\t\t<img src=\"" + __webpack_require__(85) + "\" width=\"100\" height=\"100\" />\n\t\t</div>\n\t\t<div class=\"nickname-area\">\n\t\t\t<div class=\"nickname\">江东帆影</div>\n\t\t\t<i class=\"iconfont men\">&#xe60b;</i>\n\t\t\t<i class=\"iconfont women\">&#xe60d;</i>\n\t\t</div>\n\t\t<div class=\"signature\">江畔何人初见月，江月何年初照人</div>\n\t\t<div class=\"meta-area\">\n\t\t\t<div class=\"meta-item\">\n\t\t\t\t<span class=\"item-l\">备注：</span>\n\t\t\t\t<div class=\"item-r\">陆孤瞻</div>\n\t\t\t</div>\n\t\t\t<div class=\"meta-item\">\n\t\t\t\t<span class=\"item-l\">地区：</span>\n\t\t\t\t<div class=\"item-r\">广东 罗浮山</div>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"button-area\">\n\t\t\t<a class=\"send-btn\" href=\"javascript:;\">发消息</a>\n\t\t</div>\n\t</div>";
 
 /***/ },
 /* 85 */
 /***/ function(module, exports) {
 
-	module.exports = "data:image/jpeg;base64,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"
+	module.exports = "<div class=\"title-wrap\">\n\t\t<div class=\"wrap-poi\">\n\t\t\t<span class=\"poi-name\">详细信息</span>\n\t\t</div>\n\t</div>\n\n\t<div class=\"conatct-bd\" v-if=\"info\">\n\t\t<div class=\"avatar\">\n\t\t\t<img :src=\"info.avatar\" width=\"100\" height=\"100\" />\n\t\t</div>\n\t\t<div class=\"nickname-area\">\n\t\t\t<div class=\"nickname\">{{info.nickname}}</div>\n\t\t\t<i v-if=\"info.gender == 'man' \" class=\"iconfont men\">&#xe60b;</i>\n\t\t\t<i v-if=\"info.gender == 'woman' \" class=\"iconfont women\">&#xe60d;</i>\n\t\t</div>\n\t\t<div class=\"signature\">{{info.signature}}</div>\n\n\t\t<div v-if=\"info.meta\" class=\"meta-area\">\n\t\t\t<div v-for=\"item in info.meta\" class=\"meta-item\">\n\t\t\t\t<span class=\"item-l\">{{item.label}}：</span>\n\t\t\t\t<div class=\"item-r\">{{item.value}}</div>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class=\"button-area\">\n\t\t\t<a @click=\"addChat(currentKey)\" class=\"send-btn\" href=\"javascript:;\">发消息</a>\n\t\t</div>\n\t</div>";
 
 /***/ },
 /* 86 */

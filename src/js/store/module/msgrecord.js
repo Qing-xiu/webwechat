@@ -1,4 +1,4 @@
-import {PUBLISH_MSG} from '../mutations.js'
+import {PUBLISH_MSG, ADD_MSGRECORD, TOP_MSGRECORD} from '../mutations.js'
 
 export const msgrecordState = [
 	{
@@ -37,5 +37,15 @@ export const msgrecordMutations = {
 			time: Date.now(),
 			userId: state.userId
 		})
+	},
+
+	[ADD_MSGRECORD] (state, data){
+		state.msgRecord.unshift({
+			list: data
+		})
+	},
+
+	[TOP_MSGRECORD] ({msgRecord}, index) {
+		msgRecord.unshift(msgRecord.splice(index, 1)[0])
 	}
 }

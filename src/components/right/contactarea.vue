@@ -5,29 +5,26 @@
 		</div>
 	</div>
 
-	<div class="conatct-bd">
+	<div class="conatct-bd" v-if="info">
 		<div class="avatar">
-			<img src="../../img/webwxgeticon.jpeg" width="100" height="100" />
+			<img :src="info.avatar" width="100" height="100" />
 		</div>
 		<div class="nickname-area">
-			<div class="nickname">江东帆影</div>
-			<i class="iconfont men">&#xe60b;</i>
-			<i class="iconfont women">&#xe60d;</i>
+			<div class="nickname">{{info.nickname}}</div>
+			<i v-if="info.gender == 'man' " class="iconfont men">&#xe60b;</i>
+			<i v-if="info.gender == 'woman' " class="iconfont women">&#xe60d;</i>
 		</div>
-		<div class="signature">江畔何人初见月，江月何年初照人</div>
-		<div class="meta-area">
-			<div class="meta-item">
-				<span class="item-l">备注：</span>
-				<div class="item-r">陆孤瞻</div>
-			</div>
-			<div class="meta-item">
-				<span class="item-l">地区：</span>
-				<div class="item-r">广东 罗浮山</div>
+		<div class="signature">{{info.signature}}</div>
+
+		<div v-if="info.meta" class="meta-area">
+			<div v-for="item in info.meta" class="meta-item">
+				<span class="item-l">{{item.label}}：</span>
+				<div class="item-r">{{item.value}}</div>
 			</div>
 		</div>
 
 		<div class="button-area">
-			<a class="send-btn" href="javascript:;">发消息</a>
+			<a @click="addChat(currentKey)" class="send-btn" href="javascript:;">发消息</a>
 		</div>
 	</div>
 </template>
@@ -37,7 +34,36 @@
 </style>
 
 <script>
+	import store from '../../js/store/index.js'
+
 	export default {
-		name: 'contactarea'
+		name: 'contactarea',
+		computed: {
+			contact () {
+				var members = store.state.members,
+					data = [];
+
+				for(var i in members){
+					if(members[i].relation == 'friend'){
+						data[i] = members[i]
+						//data.push(members[i])
+					}
+				}
+
+				console.log(data)
+
+				return data;
+			},
+			currentKey () {
+				return store.state.contact.currentKey
+			},
+			info () {
+				return this.contact[this.currentKey]
+			}
+		},
+
+		methods: {
+			addChat: store.actions.addChat
+		}
 	}
 </script>

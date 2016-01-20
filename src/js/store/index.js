@@ -4,6 +4,7 @@ import {chatListInitialState, chatListMutations} from './module/chatlist.js';
 import {initialState, initialMutations} from './module/initial.js'
 import {membersState, membersMutations} from './module/members.js'
 import {msgrecordState, msgrecordMutations} from './module/msgrecord.js'
+import {contactState, contactMutations} from './module/contactlist.js'
 import * as actions from "./actions.js";
 
 Vue.use(Vuex);
@@ -20,10 +21,11 @@ const store = new Vuex.Store({
 		currentChatIndex: initialState.currentChatIndex,
 		memberModal: initialState.memberModal,
 		chatList: chatListInitialState,
-		msgRecord: msgrecordState
+		msgRecord: msgrecordState,
+		contact: contactState
 	},
 
-	mutations: [chatListMutations, initialMutations, msgrecordMutations],
+	mutations: [chatListMutations, initialMutations, msgrecordMutations, contactMutations],
 	
 	actions,
 })
