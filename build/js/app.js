@@ -13795,6 +13795,7 @@
 	var topChat = exports.topChat = function topChat(store, index) {
 		store.dispatch(types.TOP_CHATLIST, index);
 		store.dispatch(types.TOP_MSGRECORD, index);
+		store.actions.toggleChat(0);
 	};
 
 /***/ },

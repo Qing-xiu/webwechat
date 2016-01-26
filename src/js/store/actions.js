@@ -62,12 +62,11 @@ export const addChat = (store, id) => {
 	store.actions.changeView('chat');
 	store.actions.toggleChat(0);
 	store.actions.addMsgRecord([])
-
-
 }
 
 export const topChat = (store, index) => {
 	store.dispatch(types.TOP_CHATLIST, index)
 	store.dispatch(types.TOP_MSGRECORD, index)
+	store.actions.toggleChat(0)
 }
 
